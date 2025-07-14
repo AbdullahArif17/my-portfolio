@@ -12,19 +12,19 @@ export default function Contact() {
     {
       icon: Mail,
       title: "Email",
-      value: "abdullah.arif@example.com",
-      href: "mailto:abdullah.arif@example.com",
+      value: "abdullaharif893@gmail.com",
+      href: "mailto:abdullaharif893@gmail.com",
     },
     {
       icon: Phone,
       title: "Phone",
-      value: "+1 (555) 123-4567",
-      href: "tel:+15551234567",
+      value: "+92 312 3456789",
+      href: "tel:+923123456789",
     },
     {
       icon: MapPin,
       title: "Location",
-      value: "New York, NY",
+      value: "Lahore, Pakistan",
       href: "#",
     },
   ]
@@ -42,7 +42,7 @@ export default function Contact() {
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">Get In Touch</h2>
           <div className="w-24 h-1 bg-blue-500 mx-auto mb-8"></div>
           <p className="text-gray-300 max-w-2xl mx-auto">
-            Have a project in mind or want to collaborate? I'd love to hear from you!
+            Have a project in mind or want to collaborate? I&apos;d love to hear from you!
           </p>
         </motion.div>
 
@@ -55,9 +55,9 @@ export default function Contact() {
             className="space-y-8"
           >
             <div>
-              <h3 className="text-2xl font-semibold text-white mb-6">Let's Connect</h3>
+              <h3 className="text-2xl font-semibold text-white mb-6">Let&apos;s Connect</h3>
               <p className="text-gray-300 leading-relaxed mb-8">
-                I'm always open to discussing new opportunities, interesting projects, or just having a chat about
+                I&apos;m always open to discussing new opportunities, interesting projects, or just having a chat about
                 technology and development.
               </p>
             </div>
@@ -101,7 +101,7 @@ export default function Contact() {
               <CardHeader>
                 <CardTitle className="text-white">Send a Message</CardTitle>
                 <CardDescription className="text-gray-300">
-                  Fill out the form below and I'll get back to you as soon as possible.
+                  Fill out the form below and I&apos;ll get back to you as soon as possible.
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">

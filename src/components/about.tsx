@@ -57,7 +57,7 @@ export default function About() {
               and it has evolved into a passion for building digital solutions that make a difference.
             </p>
             <p className="text-gray-300 leading-relaxed">
-              I believe in continuous learning and staying updated with the latest trends in technology. When I'm not
+              I believe in continuous learning and staying updated with the latest trends in technology. When I&apos;m not
               coding, you can find me exploring new frameworks, contributing to open-source projects, or sharing
               knowledge with the developer community.
             </p>
