@@ -18,13 +18,13 @@ export default function Contact() {
     {
       icon: Phone,
       title: "Phone",
-      value: "+92 312 3456789",
-      href: "tel:+923123456789",
+      value: "+92 3362725979",
+      href: "tel:+923362725979",
     },
     {
       icon: MapPin,
       title: "Location",
-      value: "Lahore, Pakistan",
+      value: "Karachi, Pakistan",
       href: "#",
     },
   ]
@@ -58,7 +58,7 @@ export default function Contact() {
               <h3 className="text-2xl font-semibold text-white mb-6">Let&apos;s Connect</h3>
               <p className="text-gray-300 leading-relaxed mb-8">
                 I&apos;m always open to discussing new opportunities, interesting projects, or just having a chat about
-                technology and development.
+                technology and development. I am also open to new opportunities and collaborations.
               </p>
             </div>
 

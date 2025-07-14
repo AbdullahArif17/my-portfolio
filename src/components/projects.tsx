@@ -24,30 +24,7 @@ export default function Projects() {
         console.error("Error fetching projects:", err)
         // Fallback to static data if Sanity fails
         setProjects([
-          {
-            _id: "1",
-            title: "E-Commerce Platform",
-            description:
-              "A full-stack e-commerce solution with user authentication, payment integration, and admin dashboard.",
-            image: { asset: { _ref: "", _type: "reference" }, _type: "image" },
-            technologies: ["Next.js", "TypeScript", "Stripe", "PostgreSQL"],
-            liveUrl: "#",
-            githubUrl: "#",
-            featured: true,
-            order: 1,
-          },
-          {
-            _id: "2",
-            title: "Task Management App",
-            description:
-              "A collaborative task management application with real-time updates and team collaboration features.",
-            image: { asset: { _ref: "", _type: "reference" }, _type: "image" },
-            technologies: ["React", "Node.js", "Socket.io", "MongoDB"],
-            liveUrl: "#",
-            githubUrl: "#",
-            featured: true,
-            order: 2,
-          },
+          
         ])
       } finally {
         setLoading(false)

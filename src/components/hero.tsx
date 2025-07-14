@@ -8,7 +8,7 @@ import Link from "next/link";
 
 export default function Hero() {
   const [text, setText] = useState("");
-  const fullText = "Full Stack Developer";
+  const fullText = "Web Developer";
 
   useEffect(() => {
     let i = 0;
@@ -138,19 +138,19 @@ export default function Hero() {
             transition={{ delay: 1.2 }}
           >
             <a
-              href="https://github.com"
+              href="https://github.com/AbdullahArif17"
               className="text-white hover:text-blue-300 transition-colors"
             >
               <Github className="h-8 w-8" />
             </a>
             <a
-              href="https://linkedin.com"
+              href="https://www.linkedin.com/in/abdullah-arif-89ab862b4/"
               className="text-white hover:text-blue-300 transition-colors"
             >
               <Linkedin className="h-8 w-8" />
             </a>
             <a
-              href="abdullaharif893@gmail.com"
+              href="mailto:abdullaharif893@gmail.com"
               className="text-white hover:text-blue-300 transition-colors"
             >
               <Mail className="h-8 w-8" />
