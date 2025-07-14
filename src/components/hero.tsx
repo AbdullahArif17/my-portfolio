@@ -112,6 +112,7 @@ export default function Hero() {
           >
             <Link href="mailto:abdullaharif893@gmail.com">
               <Button
+                onClick={() => window.open("mailto:abdullaharif893@gmail.com")}
                 size="lg"
                 className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3"
               >
@@ -120,12 +121,13 @@ export default function Hero() {
               </Button>
             </Link>
             <Button
+              onClick={() => window.open("/resume.pdf", "_blank")}
               variant="outline"
               size="lg"
               className="border-white text-white hover:bg-white hover:text-black px-8 py-3 bg-transparent"
             >
               <Download className="mr-2 h-5 w-5" />
-              Download CV
+              View Resume
             </Button>
           </motion.div>
 
