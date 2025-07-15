@@ -1,39 +1,43 @@
-"use client"
+"use client";
 
-import Image from "next/image"
-import { useState, useEffect } from "react"
-import { motion } from "framer-motion"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { ExternalLink, Github, Loader2 } from "lucide-react"
-import { client, urlFor, featuredProjectsQuery } from "@/sanity/lib/sanity"
-import type { SanityProject } from "@/types/sanity"
+import Image from "next/image";
+import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { ExternalLink, Github, Loader2 } from "lucide-react";
+import { client, urlFor, featuredProjectsQuery } from "@/sanity/lib/sanity";
+import type { SanityProject } from "@/types/sanity";
 
 export default function Projects() {
-  const [projects, setProjects] = useState<SanityProject[]>([])
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
+  const [projects, setProjects] = useState<SanityProject[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const data = await client.fetch(featuredProjectsQuery)
-        setProjects(data)
+        const data = await client.fetch(featuredProjectsQuery);
+        setProjects(data);
       } catch (err) {
-        setError("Failed to load projects")
-        console.error("Error fetching projects:", err)
+        setError("Failed to load projects");
+        console.error("Error fetching projects:", err);
         // Fallback to static data if Sanity fails
-        setProjects([
-          
-        ])
+        setProjects([]);
       } finally {
-        setLoading(false)
+        setLoading(false);
       }
-    }
+    };
 
-    fetchProjects()
-  }, [])
+    fetchProjects();
+  }, []);
 
   if (loading) {
     return (
@@ -43,7 +47,7 @@ export default function Projects() {
           <p className="text-gray-300 mt-4">Loading projects...</p>
         </div>
       </section>
-    )
+    );
   }
 
   return (
@@ -56,14 +60,18 @@ export default function Projects() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">Featured Projects</h2>
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+            Featured Projects
+          </h2>
           <div className="w-24 h-1 bg-blue-500 mx-auto mb-8"></div>
           <p className="text-gray-300 max-w-2xl mx-auto">
-            Here are some of my recent projects that showcase my skills and experience
+            Here are some of my recent projects that showcase my skills and
+            experience
           </p>
           {error && (
             <p className="text-yellow-400 mt-4 text-sm">
-              Note: Projects are currently showing fallback data. Connect Sanity CMS for dynamic content.
+              Note: Projects are currently showing fallback data. Connect Sanity
+              CMS for dynamic content.
             </p>
           )}
         </motion.div>
@@ -82,33 +90,56 @@ export default function Projects() {
                 <div className="aspect-video bg-gradient-to-br from-blue-500 to-purple-600 relative overflow-hidden">
                   {project.image?.asset?._ref ? (
                     <Image
-                      src={urlFor(project.image).width(400).height(200).url() || "/placeholder.svg"}
+                      src={
+                        urlFor(project.image).width(400).height(200).url() ||
+                        "/placeholder.svg"
+                      }
                       alt={project.title}
-                      className="w-full h-full object-fill"
+                      fill
+                      className="object-cover"
                     />
                   ) : (
-                    <div className="w-full h-full flex items-center justify-center">
-                      <span className="text-white/70 text-lg font-medium">{project.title}</span>
-                    </div>
+                    <Image
+                      src="/placeholder.svg"
+                      alt="Placeholder"
+                      fill
+                      className="object-cover opacity-50"
+                    />
                   )}
                   <div className="absolute inset-0 bg-black/20" />
                 </div>
                 <CardHeader>
                   <CardTitle className="text-white">{project.title}</CardTitle>
-                  <CardDescription className="text-gray-300">{project.description}</CardDescription>
+                  <CardDescription className="text-gray-300">
+                    {project.description}
+                  </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="flex flex-wrap gap-2">
-                    {project.technologies.map((tech: string, techIndex: number) => (
-                      <Badge key={techIndex} variant="secondary" className="bg-blue-600/20 text-blue-300">
-                        {tech}
-                      </Badge>
-                    ))}
+                    {project.technologies.map(
+                      (tech: string, techIndex: number) => (
+                        <Badge
+                          key={techIndex}
+                          variant="secondary"
+                          className="bg-blue-600/20 text-blue-300"
+                        >
+                          {tech}
+                        </Badge>
+                      )
+                    )}
                   </div>
                   <div className="flex gap-4">
                     {project.liveUrl && (
-                      <Button size="sm" className="bg-blue-600 hover:bg-blue-700" asChild>
-                        <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
+                      <Button
+                        size="sm"
+                        className="bg-blue-600 hover:bg-blue-700"
+                        asChild
+                      >
+                        <a
+                          href={project.liveUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
                           <ExternalLink className="mr-2 h-4 w-4" />
                           Live Demo
                         </a>
@@ -121,7 +152,11 @@ export default function Projects() {
                         className="border-slate-500 text-white hover:bg-slate-600 bg-transparent"
                         asChild
                       >
-                        <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
+                        <a
+                          href={project.githubUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
                           <Github className="mr-2 h-4 w-4" />
                           Code
                         </a>
@@ -135,5 +170,5 @@ export default function Projects() {
         </div>
       </div>
     </section>
-  )
+  );
 }
