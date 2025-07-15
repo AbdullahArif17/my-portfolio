@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image"
 import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -80,7 +81,7 @@ export default function Projects() {
               <Card className="bg-slate-700/50 border-slate-600 overflow-hidden h-full">
                 <div className="aspect-video bg-gradient-to-br from-blue-500 to-purple-600 relative overflow-hidden">
                   {project.image?.asset?._ref ? (
-                    <img
+                    <Image
                       src={urlFor(project.image).width(400).height(200).url() || "/placeholder.svg"}
                       alt={project.title}
                       className="w-full h-full object-fill"
