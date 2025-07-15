@@ -87,7 +87,7 @@ export default function Projects() {
               whileHover={{ y: -5 }}
             >
               <Card className="bg-slate-700/50 border-slate-600 overflow-hidden h-full">
-                <div className="aspect-video bg-gradient-to-br from-blue-500 to-purple-600 relative overflow-hidden">
+                <div className="aspect-video bg-gradient-to-br from-blue-500 to-purple-600 relative overflow-hidden rounded-xl shadow-md">
                   <Image
                     src={
                       project.image?.asset?._ref
@@ -95,6 +95,7 @@ export default function Projects() {
                             .width(800)
                             .height(450)
                             .quality(90)
+                            .auto("format")
                             .url()!
                         : "/placeholder.svg"
                     }
@@ -103,7 +104,6 @@ export default function Projects() {
                     className="object-cover"
                     sizes="(max-width: 768px) 100vw, 50vw"
                   />
-
                   <div className="absolute inset-0 bg-black/20" />
                 </div>
                 <CardHeader>
