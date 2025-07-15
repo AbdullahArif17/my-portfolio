@@ -2,7 +2,14 @@
 
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { ArrowDown, Github, Linkedin, Mail, Download } from "lucide-react";
+import {
+  ArrowDown,
+  Github,
+  Linkedin,
+  Facebook,
+  Mail,
+  Download,
+} from "lucide-react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 
@@ -120,15 +127,16 @@ export default function Hero() {
                 Get In Touch
               </Button>
             </Link>
-            <Button
-              onClick={() => window.open("/resume.pdf", "_blank")}
-              variant="outline"
-              size="lg"
-              className="border-white text-white hover:bg-white hover:text-black px-8 py-3 bg-transparent"
-            >
-              <Download className="mr-2 h-5 w-5" />
-              View Resume
-            </Button>
+            <a href="/Resume.pdf" download="Abdullah_Arif_Resume.pdf">
+              <Button
+                variant="outline"
+                size="lg"
+                className="border-white text-white hover:bg-white hover:text-black px-8 py-3 bg-transparent"
+              >
+                <Download className="mr-2 h-5 w-5" />
+                Download Resume
+              </Button>
+            </a>
           </motion.div>
 
           <motion.div
@@ -150,10 +158,10 @@ export default function Hero() {
               <Linkedin className="h-8 w-8" />
             </a>
             <a
-              href="mailto:abdullaharif893@gmail.com"
+              href="https://www.facebook.com/rayan.arif.50"
               className="text-white hover:text-blue-300 transition-colors"
             >
-              <Mail className="h-8 w-8" />
+              <Facebook className="h-8 w-8" />
             </a>
           </motion.div>
         </motion.div>
