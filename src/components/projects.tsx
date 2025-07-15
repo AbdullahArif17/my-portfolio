@@ -83,7 +83,7 @@ export default function Projects() {
                     <img
                       src={urlFor(project.image).width(400).height(200).url() || "/placeholder.svg"}
                       alt={project.title}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-fill"
                     />
                   ) : (
                     <div className="w-full h-full flex items-center justify-center">
