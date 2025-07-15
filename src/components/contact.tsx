@@ -1,5 +1,6 @@
 "use client"
 
+import { useState } from "react"
 import { motion } from "framer-motion"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -8,6 +9,34 @@ import { Textarea } from "@/components/ui/textarea"
 import { Mail, Phone, MapPin, Send } from "lucide-react"
 
 export default function Contact() {
+  const [loading, setLoading] = useState(false)
+  const [message, setMessage] = useState<string | null>(null)
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    setLoading(true)
+    setMessage(null)
+
+    const formData = new FormData(e.currentTarget)
+    const data = Object.fromEntries(formData.entries())
+
+    const res = await fetch("/api/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    })
+
+    const json = await res.json()
+    if (json.success) {
+      setMessage("✅ Message sent successfully!")
+      e.currentTarget.reset()
+    } else {
+      setMessage("❌ Failed to send message. Please try again.")
+    }
+
+    setLoading(false)
+  }
+
   const contactInfo = [
     {
       icon: Mail,
@@ -32,6 +61,7 @@ export default function Contact() {
   return (
     <section className="py-20 px-4 bg-slate-800/50">
       <div className="container mx-auto">
+        {/* Heading */}
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -47,6 +77,7 @@ export default function Contact() {
         </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+          {/* Contact Info */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -58,7 +89,7 @@ export default function Contact() {
               <h3 className="text-2xl font-semibold text-white mb-6">Let&apos;s Connect</h3>
               <p className="text-gray-300 leading-relaxed mb-8">
                 I&apos;m always open to discussing new opportunities, interesting projects, or just having a chat about
-                technology and development. I am also open to new opportunities and collaborations.
+                technology and development.
               </p>
             </div>
 
@@ -91,6 +122,7 @@ export default function Contact() {
             </div>
           </motion.div>
 
+          {/* Contact Form */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -104,54 +136,41 @@ export default function Contact() {
                   Fill out the form below and I&apos;ll get back to you as soon as possible.
                 </CardDescription>
               </CardHeader>
-              <CardContent className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
-                    <label className="text-white text-sm font-medium mb-2 block">First Name</label>
-                    <Input
-                      placeholder="John"
-                      className="bg-slate-600/50 border-slate-500 text-white placeholder:text-gray-400"
-                    />
+              <CardContent>
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <label className="text-white text-sm font-medium mb-2 block">First Name</label>
+                      <Input name="firstName" required placeholder="John" className="bg-slate-600/50 border-slate-500 text-white" />
+                    </div>
+                    <div>
+                      <label className="text-white text-sm font-medium mb-2 block">Last Name</label>
+                      <Input name="lastName" required placeholder="Doe" className="bg-slate-600/50 border-slate-500 text-white" />
+                    </div>
                   </div>
+
                   <div>
-                    <label className="text-white text-sm font-medium mb-2 block">Last Name</label>
-                    <Input
-                      placeholder="Doe"
-                      className="bg-slate-600/50 border-slate-500 text-white placeholder:text-gray-400"
-                    />
+                    <label className="text-white text-sm font-medium mb-2 block">Email</label>
+                    <Input name="email" type="email" required placeholder="you@example.com" className="bg-slate-600/50 border-slate-500 text-white" />
                   </div>
-                </div>
 
-                <div>
-                  <label className="text-white text-sm font-medium mb-2 block">Email</label>
-                  <Input
-                    type="email"
-                    placeholder="john@example.com"
-                    className="bg-slate-600/50 border-slate-500 text-white placeholder:text-gray-400"
-                  />
-                </div>
+                  <div>
+                    <label className="text-white text-sm font-medium mb-2 block">Subject</label>
+                    <Input name="subject" required placeholder="Subject..." className="bg-slate-600/50 border-slate-500 text-white" />
+                  </div>
 
-                <div>
-                  <label className="text-white text-sm font-medium mb-2 block">Subject</label>
-                  <Input
-                    placeholder="Project Inquiry"
-                    className="bg-slate-600/50 border-slate-500 text-white placeholder:text-gray-400"
-                  />
-                </div>
+                  <div>
+                    <label className="text-white text-sm font-medium mb-2 block">Message</label>
+                    <Textarea name="message" required placeholder="Your message..." rows={5} className="bg-slate-600/50 border-slate-500 text-white resize-none" />
+                  </div>
 
-                <div>
-                  <label className="text-white text-sm font-medium mb-2 block">Message</label>
-                  <Textarea
-                    placeholder="Tell me about your project..."
-                    rows={5}
-                    className="bg-slate-600/50 border-slate-500 text-white placeholder:text-gray-400 resize-none"
-                  />
-                </div>
+                  <Button disabled={loading} className="w-full bg-blue-600 hover:bg-blue-700 text-white">
+                    <Send className="mr-2 h-4 w-4" />
+                    {loading ? "Sending..." : "Send Message"}
+                  </Button>
 
-                <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white">
-                  <Send className="mr-2 h-4 w-4" />
-                  Send Message
-                </Button>
+                  {message && <p className="text-sm text-center text-gray-300 pt-2">{message}</p>}
+                </form>
               </CardContent>
             </Card>
           </motion.div>
