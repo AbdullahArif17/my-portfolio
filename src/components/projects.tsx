@@ -96,7 +96,7 @@ export default function Projects() {
                     }
                     alt={project.title || "Project image"}
                     fill
-                    className="object-cover"
+                    className="object-fill"
                   />
 
                   <div className="absolute inset-0 bg-black/20" />
