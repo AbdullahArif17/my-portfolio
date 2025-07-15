@@ -88,24 +88,17 @@ export default function Projects() {
             >
               <Card className="bg-slate-700/50 border-slate-600 overflow-hidden h-full">
                 <div className="aspect-video bg-gradient-to-br from-blue-500 to-purple-600 relative overflow-hidden">
-                  {project.image?.asset?._ref ? (
-                    <Image
-                      src={
-                        urlFor(project.image).width(400).height(200).url() ||
-                        "/placeholder.svg"
-                      }
-                      alt={project.title}
-                      fill
-                      className="object-cover"
-                    />
-                  ) : (
-                    <Image
-                      src="/placeholder.svg"
-                      alt="Placeholder"
-                      fill
-                      className="object-cover opacity-50"
-                    />
-                  )}
+                  <Image
+                    src={
+                      project.image?.asset?._ref
+                        ? urlFor(project.image).width(400).height(200).url()!
+                        : "/placeholder.svg"
+                    }
+                    alt={project.title || "Project image"}
+                    fill
+                    className="object-cover"
+                  />
+
                   <div className="absolute inset-0 bg-black/20" />
                 </div>
                 <CardHeader>
