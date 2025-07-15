@@ -91,12 +91,17 @@ export default function Projects() {
                   <Image
                     src={
                       project.image?.asset?._ref
-                        ? urlFor(project.image).width(400).height(200).url()!
+                        ? urlFor(project.image)
+                            .width(800)
+                            .height(450)
+                            .quality(90)
+                            .url()!
                         : "/placeholder.svg"
                     }
                     alt={project.title || "Project image"}
                     fill
-                    className="object-fill"
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 50vw"
                   />
 
                   <div className="absolute inset-0 bg-black/20" />
