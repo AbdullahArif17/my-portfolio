@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Hero() {
   const [text, setText] = useState("");
@@ -80,10 +81,13 @@ export default function Hero() {
             className="mb-6"
           >
             <div className="relative w-48 h-48 md:w-64 md:h-64 mx-auto mb-6">
-              <img
+              <Image
                 src="/me.jpg"
                 alt="Abdullah Arif"
+                width={256}
+                height={256}
                 className="w-full h-full rounded-full object-cover border-4 border-blue-400 shadow-2xl"
+                priority
               />
               <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-blue-400/20 to-purple-400/20"></div>
               <div className="absolute -inset-1 rounded-full bg-gradient-to-tr from-blue-400 to-purple-400 opacity-0"></div>
