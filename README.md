@@ -1,36 +1,167 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Abdullah Arif - Portfolio Website
 
-## Getting Started
+A modern, responsive portfolio website built with Next.js 15, TypeScript, Tailwind CSS, and Framer Motion. Features a beautiful dark theme, smooth animations, and a contact form with email integration.
 
-First, run the development server:
+## ✨ Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- **Modern Design**: Clean, professional design with dark theme
+- **Responsive**: Fully responsive across all devices
+- **Smooth Animations**: Powered by Framer Motion
+- **Contact Form**: Integrated with Resend for email functionality
+- **CMS Integration**: Sanity CMS for content management
+- **SEO Optimized**: Meta tags, Open Graph, and structured data
+- **Performance**: Optimized with Next.js 15 and Turbopack
+- **Accessibility**: ARIA labels and keyboard navigation
+- **Theme Toggle**: Light/Dark mode support
+- **Analytics**: Google Analytics integration
+
+## 🚀 Tech Stack
+
+- **Framework**: Next.js 15 with App Router
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS
+- **Animations**: Framer Motion
+- **UI Components**: Radix UI + shadcn/ui
+- **CMS**: Sanity
+- **Email**: Resend
+- **Deployment**: Vercel (recommended)
+
+## 📦 Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/yourusername/my-portfolio.git
+   cd my-portfolio
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install
+   # or
+   yarn install
+   # or
+   pnpm install
+   ```
+
+3. **Set up environment variables**
+   Create a `.env.local` file in the root directory:
+   ```env
+   # Sanity CMS Configuration
+   NEXT_PUBLIC_SANITY_PROJECT_ID=your_sanity_project_id
+   NEXT_PUBLIC_SANITY_DATASET=production
+   NEXT_PUBLIC_SANITY_API_VERSION=2025-07-08
+
+   # Email Service (Resend)
+   RESEND_API_KEY=your_resend_api_key
+
+   # Google Analytics (optional)
+   NEXT_PUBLIC_GA_ID=your_google_analytics_id
+   ```
+
+4. **Set up Sanity CMS**
+   ```bash
+   npm run sanity dev
+   ```
+   This will open Sanity Studio where you can manage your content.
+
+5. **Run the development server**
+   ```bash
+   npm run dev
+   # or
+   yarn dev
+   # or
+   pnpm dev
+   ```
+
+   Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+## 🛠️ Configuration
+
+### Sanity CMS Setup
+1. Create a new Sanity project at [sanity.io](https://sanity.io)
+2. Copy your project ID and dataset name
+3. Update the environment variables
+4. Run `npm run sanity dev` to start the studio
+
+### Email Setup (Resend)
+1. Sign up at [resend.com](https://resend.com)
+2. Get your API key
+3. Update the `RESEND_API_KEY` in your environment variables
+4. Update the email address in `src/app/api/contact/route.ts`
+
+### Google Analytics (Optional)
+1. Create a Google Analytics 4 property
+2. Get your measurement ID
+3. Add it to your environment variables
+
+## 📁 Project Structure
+
+```
+src/
+├── app/                 # Next.js App Router
+│   ├── api/            # API routes
+│   ├── globals.css     # Global styles
+│   ├── layout.tsx      # Root layout
+│   └── page.tsx        # Home page
+├── components/         # React components
+│   ├── ui/            # shadcn/ui components
+│   ├── hero.tsx       # Hero section
+│   ├── about.tsx      # About section
+│   ├── skills.tsx     # Skills section
+│   ├── projects.tsx   # Projects section
+│   ├── contact.tsx    # Contact section
+│   ├── navigation.tsx # Navigation component
+│   └── theme-toggle.tsx # Theme toggle
+├── sanity/            # Sanity CMS configuration
+│   ├── schemaTypes/   # Content schemas
+│   └── lib/          # Sanity utilities
+└── types/            # TypeScript type definitions
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🎨 Customization
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Colors and Theme
+- Update colors in `tailwind.config.ts`
+- Modify theme variables in `src/app/globals.css`
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Content
+- Update personal information in components
+- Add/remove sections as needed
+- Customize animations in Framer Motion components
 
-## Learn More
+### Styling
+- Modify component styles in their respective files
+- Update global styles in `src/app/globals.css`
 
-To learn more about Next.js, take a look at the following resources:
+## 🚀 Deployment
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Vercel (Recommended)
+1. Push your code to GitHub
+2. Connect your repository to Vercel
+3. Add environment variables in Vercel dashboard
+4. Deploy!
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Other Platforms
+The app can be deployed to any platform that supports Next.js:
+- Netlify
+- Railway
+- DigitalOcean App Platform
+- AWS Amplify
 
-## Deploy on Vercel
+## 📝 License
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+This project is open source and available under the [MIT License](LICENSE).
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## 📞 Contact
+
+- **Email**: abdullaharif893@gmail.com
+- **LinkedIn**: [Abdullah Arif](https://www.linkedin.com/in/abdullah-arif-89ab862b4/)
+- **GitHub**: [AbdullahArif17](https://github.com/AbdullahArif17)
+
+---
+
+Made with ❤️ by Abdullah Arif

@@ -12,8 +12,8 @@ export async function POST(req: Request) {
     const fullName = `${firstName} ${lastName}`;
 
     const data = await resend.emails.send({
-      from: "Your Portfolio <onboarding@resend.dev>", // You can customize this in Resend dashboard
-      to: "abdullaharif893@gmail.com", // Change this to your receiving email
+      from: "Your Portfolio <onboarding@resend.dev>", 
+      to: "abdullaharif893@gmail.com", 
       subject: `New Contact Form Submission: ${subject}`,
       replyTo: email,
       html: `
