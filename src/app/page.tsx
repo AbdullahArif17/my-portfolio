@@ -5,7 +5,7 @@ import Projects from "@/components/projects"
 // import Experience from "@/components/experience"
 import Contact from "@/components/contact"
 import Navigation from "@/components/navigation"
-import ThemeToggle from "@/components/theme-toggle"
+// import ThemeToggle from "@/components/theme-toggle"
 import ScrollToTop from "@/components/scroll-to-top"
 import { ThemeProvider } from "next-themes"
 
