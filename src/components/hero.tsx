@@ -95,17 +95,16 @@ export default function Hero() {
           </motion.div>
 
           <motion.div
-            className="text-2xl md:text-3xl text-blue-300 h-12 flex items-center justify-center"
+            className="text-2xl font-bold md:text-3xl text-blue-300 h-12 flex items-center justify-center"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5 }}
           >
             {text}
-            <span className="animate-pulse ml-1">|</span>
           </motion.div>
 
           <motion.p
-            className="text-lg text-gray-300 max-w-2xl mx-auto leading-relaxed"
+            className="text-lg font-medium text-gray-300 max-w-2xl mx-auto leading-relaxed"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.8 }}
