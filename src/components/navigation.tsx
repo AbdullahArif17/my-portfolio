@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Menu, X } from "lucide-react";
 
 const navItems = [
   { name: "Home", href: "#home" },
@@ -13,7 +12,6 @@ const navItems = [
 ];
 
 export default function Navigation() {
-  const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -30,7 +28,7 @@ export default function Navigation() {
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
     }
-    setIsOpen(false);
+    // no mobile menu to close
   };
 
   return (
@@ -53,8 +51,8 @@ export default function Navigation() {
             Abdullah Arif
           </motion.div>
 
-          {/* Desktop Navigation */}
-          <div className="hidden font-medium md:flex items-center space-x-8">
+          {/* Desktop Navigation only */}
+          <div className="hidden md:flex font-medium items-center space-x-8 md:space-x-8">
             {navItems.map((item, index) => (
               <motion.button
                 key={item.name}
@@ -62,7 +60,7 @@ export default function Navigation() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
                 onClick={() => scrollToSection(item.href)}
-                className="text-gray-300 hover:text-white transition-colors relative group"
+                className="text-gray-300 hover:text-white transition-colors relative group whitespace-nowrap"
               >
                 {item.name}
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-400 transition-all group-hover:w-full"></span>
@@ -70,39 +68,8 @@ export default function Navigation() {
             ))}
           </div>
 
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden text-white p-2"
-            aria-label="Toggle menu"
-          >
-            {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-          </button>
         </div>
-
-        {/* Mobile Navigation */}
-        <motion.div
-          initial={{ opacity: 0, height: 0 }}
-          animate={{
-            opacity: isOpen ? 1 : 0,
-            height: isOpen ? "auto" : 0,
-          }}
-          transition={{ duration: 0.3 }}
-          className="md:hidden overflow-hidden bg-slate-800/95 backdrop-blur-md border-t border-slate-700"
-        >
-          <div className="py-4 space-y-2">
-            {navItems.map((item) => (
-              <button
-                key={item.name}
-                onClick={() => scrollToSection(item.href)}
-                className="block w-full text-left px-4 py-2 text-gray-300 hover:text-white hover:bg-slate-700/50 transition-colors"
-              >
-                {item.name}
-              </button>
-            ))}
-          </div>
-        </motion.div>
       </div>
     </motion.nav>
   );
-} 
+}
