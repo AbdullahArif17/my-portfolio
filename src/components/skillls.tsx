@@ -100,35 +100,7 @@ export default function Skills() {
           ))}
         </div>
 
-        {/* Experience journey (replacing the old experience section briefly) */}
-        <motion.div
-           initial={{ opacity: 0, y: 40 }}
-           whileInView={{ opacity: 1, y: 0 }}
-           viewport={{ once: true, margin: "-100px" }}
-           transition={{ duration: 0.6, delay: 0.4 }}
-           className="mt-16 md:mt-20 pt-12 md:pt-16 border-t border-white/5 relative"
-        >
-          <div className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 bg-slate-900 border border-white/5 px-6 py-2 rounded-full text-xs font-bold tracking-widest text-indigo-400 uppercase">
-            Learning Journey
-          </div>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 text-center">
-             {[
-               { year: "2023", title: "Started Coding", desc: "HTML, CSS & basic JS" },
-               { year: "2023 Q3", title: "Governor Sindh IT", desc: "Enrolled in intensive program" },
-               { year: "2024", title: "Frontend Master", desc: "React, Next.js, & Tailwind" },
-               { year: "Present", title: "Full Stack Dev", desc: "Python, DBs & Architecture" },
-             ].map((milestone, i) => (
-               <div key={i} className="glass p-6 rounded-2xl relative group">
-                  <div className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-400 mb-2">
-                    {milestone.year}
-                  </div>
-                  <h5 className="text-lg font-semibold text-white mb-1">{milestone.title}</h5>
-                  <p className="text-gray-400 text-sm">{milestone.desc}</p>
-               </div>
-             ))}
-          </div>
-        </motion.div>
+
 
       </div>
     </section>
