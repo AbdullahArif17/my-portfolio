@@ -29,7 +29,7 @@ export default function Skills() {
   ];
 
   return (
-    <section id="skills" className="py-24 relative overflow-hidden bg-slate-900/40 border-y border-white/5">
+    <section id="skills" className="py-16 md:py-24 relative overflow-hidden bg-slate-900/40 border-y border-white/5">
       {/* Background Decorative glow */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-indigo-900/10 to-transparent pointer-events-none" />
 
@@ -44,7 +44,7 @@ export default function Skills() {
           <h2 className="text-sm font-bold tracking-widest text-indigo-400 uppercase mb-3 text-center">
             Expertise
           </h2>
-          <h3 className="text-4xl md:text-5xl font-bold text-white mb-6 text-center text-balance mx-auto">
+          <h3 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-6 text-center text-balance mx-auto">
             Skills & <span className="gradient-text">Technologies</span>
           </h3>
           <div className="section-divider" />
@@ -63,7 +63,7 @@ export default function Skills() {
               transition={{ duration: 0.6, delay: index * 0.15 }}
             >
               <div 
-                className={`glass-card p-8 rounded-2xl h-full border ${category.borderColor} bg-gradient-to-br ${category.color} hover:shadow-xl hover:shadow-indigo-500/10 transition-all duration-300 relative overflow-hidden group`}
+                className={`glass-card p-6 sm:p-8 rounded-2xl h-full border ${category.borderColor} bg-gradient-to-br ${category.color} hover:shadow-xl hover:shadow-indigo-500/10 transition-all duration-300 relative overflow-hidden group`}
               >
                 {/* Background Pattern */}
                 <div className="absolute right-0 bottom-0 opacity-10 blur-xl w-32 h-32 bg-white rounded-full group-hover:scale-150 transition-transform duration-700 pointer-events-none" />
@@ -106,7 +106,7 @@ export default function Skills() {
            whileInView={{ opacity: 1, y: 0 }}
            viewport={{ once: true, margin: "-100px" }}
            transition={{ duration: 0.6, delay: 0.4 }}
-           className="mt-20 pt-16 border-t border-white/5 relative"
+           className="mt-16 md:mt-20 pt-12 md:pt-16 border-t border-white/5 relative"
         >
           <div className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 bg-slate-900 border border-white/5 px-6 py-2 rounded-full text-xs font-bold tracking-widest text-indigo-400 uppercase">
             Learning Journey

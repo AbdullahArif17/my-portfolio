@@ -85,7 +85,7 @@ export default function Projects() {
   }, []);
 
   return (
-    <section id="projects" className="py-24 relative overflow-hidden bg-slate-900/60">
+    <section id="projects" className="py-16 md:py-24 relative overflow-hidden bg-slate-900/60">
       {/* Background gradients */}
       <div className="absolute top-1/4 -left-1/4 w-1/2 h-1/2 bg-blue-500/10 blur-[150px] rounded-full pointer-events-none" />
       <div className="absolute bottom-1/4 -right-1/4 w-1/2 h-1/2 bg-purple-500/10 blur-[150px] rounded-full pointer-events-none" />
@@ -101,7 +101,7 @@ export default function Projects() {
           <h2 className="text-sm font-bold tracking-widest text-indigo-400 uppercase mb-3">
             Portfolio
           </h2>
-          <h3 className="text-4xl md:text-5xl font-bold text-white mb-6">
+          <h3 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-6">
             Featured <span className="gradient-text">Projects</span>
           </h3>
           <div className="section-divider" />
@@ -191,7 +191,7 @@ export default function Projects() {
                   </div>
 
                   {/* Content Container */}
-                  <div className="p-6 md:p-8 flex-1 flex flex-col z-20 bg-gradient-to-b from-slate-900/50 to-slate-900/80">
+                  <div className="p-5 sm:p-6 md:p-8 flex-1 flex flex-col z-20 bg-gradient-to-b from-slate-900/50 to-slate-900/80">
                     <h4 className="text-2xl font-bold text-white mb-3 group-hover:text-indigo-400 transition-colors duration-300">
                       {project.title}
                     </h4>

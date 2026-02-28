@@ -72,7 +72,7 @@ export default function Contact() {
   ]
 
   return (
-    <section id="contact" className="py-24 relative overflow-hidden bg-slate-900 border-t border-white/5">
+    <section id="contact" className="py-16 md:py-24 relative overflow-hidden bg-slate-900 border-t border-white/5">
       {/* Dynamic Background Noise */}
       <div className="absolute inset-0 noise pointer-events-none opacity-[0.03]" />
       
@@ -91,7 +91,7 @@ export default function Contact() {
           <h2 className="text-sm font-bold tracking-widest text-indigo-400 uppercase mb-3 text-center">
             Let&apos;s Talk
           </h2>
-          <h3 className="text-4xl md:text-5xl font-bold text-white mb-6 text-center text-balance mx-auto">
+          <h3 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-6 text-center text-balance mx-auto">
             Get In <span className="gradient-text">Touch</span>
           </h3>
           <div className="section-divider" />
@@ -124,7 +124,7 @@ export default function Contact() {
                   href={info.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`flex items-start p-6 rounded-2xl glass-card border ${info.border} hover:bg-white/[0.04] transition-all duration-300 group shadow-sm hover:shadow-md`}
+                  className={`flex items-start p-5 sm:p-6 rounded-2xl glass-card border ${info.border} hover:bg-white/[0.04] transition-all duration-300 group shadow-sm hover:shadow-md`}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
@@ -157,7 +157,7 @@ export default function Contact() {
           >
             <Card className="glass-card border border-white/10 shadow-xl overflow-hidden rounded-2xl">
               <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500" />
-              <CardHeader className="pt-8 px-6 md:px-8">
+              <CardHeader className="pt-6 sm:pt-8 px-5 sm:px-6 md:px-8">
                 <CardTitle className="text-2xl text-white">Send me a message</CardTitle>
                 <CardDescription className="text-gray-400 mt-2 text-base">
                   I&apos;m here to help and answer any questions you might have.

@@ -63,7 +63,7 @@ export default function Hero() {
   ];
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 pb-16 md:pt-0 md:pb-0">
       {/* Animated Orbs */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
@@ -132,7 +132,7 @@ export default function Hero() {
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 relative z-10">
-        <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
+        <div className="flex flex-col lg:flex-row items-center gap-8 md:gap-12 lg:gap-16">
           {/* Text Content */}
           <motion.div
             initial={{ opacity: 0, x: -40 }}
@@ -155,7 +155,7 @@ export default function Hero() {
             </motion.div>
 
             <motion.h1
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6"
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-4 sm:mb-6"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 0.8 }}
@@ -167,7 +167,7 @@ export default function Hero() {
 
             {/* Typing animation */}
             <motion.div
-              className="text-xl sm:text-2xl md:text-3xl font-semibold mb-6 h-10 flex items-center justify-center lg:justify-start"
+              className="text-lg sm:text-2xl md:text-3xl font-semibold mb-4 sm:mb-6 h-10 flex items-center justify-center lg:justify-start"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.5 }}
@@ -197,8 +197,7 @@ export default function Hero() {
             >
               <a href="mailto:abdullaharif893@gmail.com">
                 <Button
-                  size="lg"
-                  className="glow-button text-white px-8 py-3 rounded-xl text-base font-medium w-full sm:w-auto border-0"
+                  className="glow-button text-white px-6 sm:px-8 py-3 rounded-xl text-sm sm:text-base font-medium w-full sm:w-auto border-0"
                 >
                   <Mail className="mr-2 h-5 w-5" />
                   Get In Touch
@@ -207,8 +206,7 @@ export default function Hero() {
               <a href="/Resume.pdf" download="Abdullah_Arif_Resume.pdf">
                 <Button
                   variant="outline"
-                  size="lg"
-                  className="bg-white/[0.04] border-white/10 text-white hover:bg-white/[0.08] hover:border-white/20 px-8 py-3 rounded-xl text-base font-medium w-full sm:w-auto backdrop-blur-sm transition-all duration-300"
+                  className="bg-white/[0.04] border-white/10 text-white hover:bg-white/[0.08] hover:border-white/20 px-6 sm:px-8 py-3 rounded-xl text-sm sm:text-base font-medium w-full sm:w-auto backdrop-blur-sm transition-all duration-300"
                 >
                   <Download className="mr-2 h-5 w-5" />
                   Download Resume
@@ -267,7 +265,7 @@ export default function Hero() {
               />
 
               {/* Image container */}
-              <div className="relative w-56 h-56 sm:w-64 sm:h-64 md:w-72 md:h-72 lg:w-80 lg:h-80 rounded-full overflow-hidden border-4 border-slate-900">
+              <div className="relative w-48 h-48 sm:w-56 sm:h-56 md:w-72 md:h-72 lg:w-80 lg:h-80 rounded-full overflow-hidden border-4 border-slate-900">
                 <Image
                   src="/me.jpg"
                   alt="Abdullah Arif - Full Stack Web Developer"

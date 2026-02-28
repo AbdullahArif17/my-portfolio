@@ -153,7 +153,7 @@ export default function Navigation() {
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="absolute right-0 top-0 h-full w-72 glass border-l border-white/10"
+              className="absolute right-0 top-0 h-full w-[80vw] max-w-sm glass border-l border-white/10"
               style={{ background: "rgba(15, 10, 30, 0.95)" }}
             >
               <div className="flex flex-col pt-24 px-6 space-y-2">

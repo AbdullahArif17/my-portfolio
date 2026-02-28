@@ -39,7 +39,7 @@ export default function About() {
   ];
 
   return (
-    <section id="about" className="py-24 relative overflow-hidden">
+    <section id="about" className="py-16 md:py-24 relative overflow-hidden">
       {/* Background elements */}
       <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-indigo-500/5 blur-[120px] rounded-full pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-1/3 h-1/3 bg-purple-500/5 blur-[120px] rounded-full pointer-events-none" />
@@ -55,7 +55,7 @@ export default function About() {
           <h2 className="text-sm font-bold tracking-widest text-indigo-400 uppercase mb-3">
             Discover
           </h2>
-          <h3 className="text-4xl md:text-5xl font-bold text-white mb-6">
+          <h3 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-6">
             About <span className="gradient-text">Me</span>
           </h3>
           <div className="section-divider" />
@@ -71,7 +71,7 @@ export default function About() {
             className="space-y-8"
           >
             <div>
-              <h4 className="text-2xl sm:text-3xl font-bold text-white mb-6 leading-tight">
+              <h4 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-6 leading-tight">
                 A passionate developer turning complex problems into elegant solutions.
               </h4>
               <div className="space-y-4 text-gray-400 leading-relaxed">
