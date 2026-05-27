@@ -29,7 +29,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="relative border-t border-white/10 bg-slate-950 overflow-hidden pt-12 md:pt-16 pb-6 md:pb-8">
+    <footer className="relative border-t border-white/10 bg-slate-950/95 overflow-hidden pt-12 md:pt-16 pb-6 md:pb-8">
       {/* Background Glow */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-2xl h-px bg-gradient-to-r from-transparent via-indigo-500/50 to-transparent" />
       <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-[800px] h-[300px] bg-indigo-500/10 blur-[120px] rounded-full pointer-events-none" />

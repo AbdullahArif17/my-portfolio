@@ -1,3 +1,19 @@
+// Safeguard for Node 25+ global localStorage issue during SSR
+if (typeof globalThis !== "undefined" && !globalThis.window) {
+  if (globalThis.localStorage && typeof globalThis.localStorage.getItem !== "function") {
+    try {
+      delete (globalThis as any).localStorage;
+    } catch (e) {
+      try {
+        globalThis.localStorage.getItem = () => null;
+        globalThis.localStorage.setItem = () => {};
+        globalThis.localStorage.removeItem = () => {};
+        globalThis.localStorage.clear = () => {};
+      } catch (err) {}
+    }
+  }
+}
+
 import type { Metadata } from "next";
 import { Inter, Roboto } from "next/font/google";
 import "./globals.css";
@@ -74,7 +90,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="dark">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

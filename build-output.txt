@@ -1,0 +1,32 @@
+
+> my-portfolio@0.1.0 build
+> next build
+
+   ▲ Next.js 15.3.8
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully in 27.0s
+   Linting and checking validity of types ...
+   Collecting page data ...
+   Generating static pages (0/6) ...
+   Generating static pages (1/6) 
+   Generating static pages (2/6) 
+   Generating static pages (4/6) 
+ ✓ Generating static pages (6/6)
+   Finalizing page optimization ...
+   Collecting build traces ...
+
+Route (app)                                 Size  First Load JS
+┌ ○ /                                    20.8 kB         214 kB
+├ ○ /_not-found                            143 B         102 kB
+├ ƒ /api/contact                           143 B         102 kB
+└ ○ /studio/[[...tool]]                  1.41 MB        1.59 MB
++ First Load JS shared by all             102 kB
+  ├ chunks/4bd1b696-f877e736e8382fc9.js  53.2 kB
+  ├ chunks/684-e20ddb7349dca7d6.js       46.4 kB
+  └ other shared chunks (total)          2.37 kB
+
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+

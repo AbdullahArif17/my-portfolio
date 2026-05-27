@@ -142,8 +142,8 @@ export default function Contact() {
             </div>
             
             <div className="mt-12 glass p-6 rounded-2xl border border-white/5 bg-gradient-to-br from-indigo-500/5 to-purple-500/5">
-               <h4 className="text-white font-medium mb-2">Available for Freelance Opportunities</h4>
-               <p className="text-sm text-gray-400">Currently accepting new projects for 2024.</p>
+               <h4 className="text-white font-medium mb-2">Available for freelance and full-time roles</h4>
+               <p className="text-sm text-gray-400">Open to exciting projects and collaborations in 2026.</p>
             </div>
           </motion.div>
 

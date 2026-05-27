@@ -1,49 +1,11 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
 import { Button } from "@/components/ui/button";
-import {
-  ArrowDown,
-  Github,
-  Linkedin,
-  Facebook,
-  Mail,
-  Download,
-  Sparkles,
-} from "lucide-react";
+import { ArrowDown, Github, Linkedin, Facebook, Mail, Download, Sparkles } from "lucide-react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 
-const roles = ["Full Stack Developer", "Next.js Specialist", "UI/UX Enthusiast", "Problem Solver"];
-
 export default function Hero() {
-  const [roleIndex, setRoleIndex] = useState(0);
-  const [text, setText] = useState("");
-  const [isDeleting, setIsDeleting] = useState(false);
-
-  const typeWriter = useCallback(() => {
-    const currentRole = roles[roleIndex];
-    if (!isDeleting) {
-      setText(currentRole.slice(0, text.length + 1));
-      if (text === currentRole) {
-        setTimeout(() => setIsDeleting(true), 2000);
-        return;
-      }
-    } else {
-      setText(currentRole.slice(0, text.length - 1));
-      if (text === "") {
-        setIsDeleting(false);
-        setRoleIndex((prev) => (prev + 1) % roles.length);
-        return;
-      }
-    }
-  }, [text, isDeleting, roleIndex]);
-
-  useEffect(() => {
-    const timer = setTimeout(typeWriter, isDeleting ? 40 : 80);
-    return () => clearTimeout(timer);
-  }, [typeWriter, isDeleting]);
-
   const socials = [
     {
       icon: Github,
@@ -63,13 +25,13 @@ export default function Hero() {
   ];
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 pb-16 md:pt-0 md:pb-0">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 pb-16 md:pt-0 md:pb-0 section-shell">
       {/* Animated Orbs */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
           className="absolute w-[500px] h-[500px] rounded-full"
           style={{
-            background: "radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, transparent 70%)",
+            background: "radial-gradient(circle, rgba(255, 255, 255, 0.12) 0%, transparent 70%)",
             top: "10%",
             left: "-10%",
           }}
@@ -82,7 +44,7 @@ export default function Hero() {
         <motion.div
           className="absolute w-[600px] h-[600px] rounded-full"
           style={{
-            background: "radial-gradient(circle, rgba(168, 85, 247, 0.12) 0%, transparent 70%)",
+            background: "radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, transparent 70%)",
             bottom: "0%",
             right: "-15%",
           }}
@@ -95,7 +57,7 @@ export default function Hero() {
         <motion.div
           className="absolute w-[400px] h-[400px] rounded-full"
           style={{
-            background: "radial-gradient(circle, rgba(236, 72, 153, 0.08) 0%, transparent 70%)",
+            background: "radial-gradient(circle, rgba(255, 255, 255, 0.06) 0%, transparent 70%)",
             top: "50%",
             left: "50%",
             transform: "translate(-50%, -50%)",
@@ -114,7 +76,7 @@ export default function Hero() {
             key={i}
             className="absolute w-1 h-1 rounded-full"
             style={{
-              background: i % 3 === 0 ? "rgba(99, 102, 241, 0.6)" : i % 3 === 1 ? "rgba(168, 85, 247, 0.5)" : "rgba(236, 72, 153, 0.4)",
+              background: i % 3 === 0 ? "rgba(255, 255, 255, 0.18)" : i % 3 === 1 ? "rgba(203, 213, 225, 0.14)" : "rgba(148, 163, 184, 0.12)",
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
             }}
@@ -145,7 +107,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card mb-8"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card mb-8 border border-emerald-400/20 shadow-[0_10px_30px_rgba(16,185,129,0.08)]"
             >
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
@@ -162,23 +124,21 @@ export default function Hero() {
             >
               <span className="text-white">Hi, I&apos;m</span>
               <br />
-              <span className="gradient-text glow-text">Abdullah Arif</span>
+              <span className="text-white">Abdullah Arif</span>
             </motion.h1>
 
-            {/* Typing animation */}
             <motion.div
               className="text-lg sm:text-2xl md:text-3xl font-semibold mb-4 sm:mb-6 h-10 flex items-center justify-center lg:justify-start"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.5 }}
             >
-              <Sparkles className="h-5 w-5 text-indigo-400 mr-2 flex-shrink-0" />
-              <span className="gradient-text-blue">{text}</span>
-              <span className="animate-pulse text-indigo-400 ml-0.5">|</span>
+              <Sparkles className="h-5 w-5 text-gray-300 mr-2 flex-shrink-0" />
+              <span className="text-white">Full Stack Web Developer</span>
             </motion.div>
 
             <motion.p
-              className="text-base sm:text-lg text-gray-400 max-w-xl mx-auto lg:mx-0 leading-relaxed mb-10"
+              className="text-base sm:text-lg text-gray-300 max-w-xl mx-auto lg:mx-0 leading-relaxed mb-10"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.7 }}
@@ -197,7 +157,7 @@ export default function Hero() {
             >
               <a href="mailto:abdullaharif893@gmail.com">
                 <Button
-                  className="glow-button text-white px-6 sm:px-8 py-3 rounded-xl text-sm sm:text-base font-medium w-full sm:w-auto border-0"
+                  className="bg-white/[0.08] text-white px-6 sm:px-8 py-3 rounded-xl text-sm sm:text-base font-semibold w-full sm:w-auto border border-white/10 shadow-[0_18px_30px_rgba(255,255,255,0.08)]"
                 >
                   <Mail className="mr-2 h-5 w-5" />
                   Get In Touch
@@ -206,7 +166,7 @@ export default function Hero() {
               <a href="/Resume.pdf" download="Abdullah_Arif_Resume.pdf">
                 <Button
                   variant="outline"
-                  className="bg-white/[0.04] border-white/10 text-white hover:bg-white/[0.08] hover:border-white/20 px-6 sm:px-8 py-3 rounded-xl text-sm sm:text-base font-medium w-full sm:w-auto backdrop-blur-sm transition-all duration-300"
+                  className="bg-white/[0.04] border-white/10 text-white hover:bg-white/[0.08] hover:border-white/20 px-6 sm:px-8 py-3 rounded-xl text-sm sm:text-base font-semibold w-full sm:w-auto backdrop-blur-sm transition-all duration-300"
                 >
                   <Download className="mr-2 h-5 w-5" />
                   Download Resume
@@ -251,13 +211,13 @@ export default function Hero() {
           >
             <div className="relative">
               {/* Glow ring behind image */}
-              <div className="absolute -inset-4 rounded-full bg-gradient-to-tr from-indigo-500/20 via-purple-500/20 to-pink-500/20 blur-2xl" />
+              <div className="absolute -inset-4 rounded-full bg-white/10 blur-2xl" />
 
               {/* Animated border ring */}
               <motion.div
                 className="absolute -inset-2 rounded-full"
                 style={{
-                  background: "conic-gradient(from 0deg, #6366f1, #a855f7, #ec4899, #6366f1)",
+                  background: "rgba(255, 255, 255, 0.12)",
                   opacity: 0.6,
                 }}
                 animate={{ rotate: 360 }}
@@ -274,36 +234,12 @@ export default function Hero() {
                   className="w-full h-full object-cover"
                   priority
                 />
-                <div className="absolute inset-0 rounded-full bg-gradient-to-t from-indigo-900/20 to-transparent" />
+                <div className="absolute inset-0 rounded-full bg-white/10" />
               </div>
 
-              {/* Floating badge */}
-              <motion.div
-                className="absolute -bottom-2 -right-2 px-4 py-2 glass-card rounded-xl"
-                animate={{ y: [0, -8, 0] }}
-                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-              >
-                <span className="text-sm font-medium gradient-text">✨ Open to work</span>
-              </motion.div>
             </div>
           </motion.div>
         </div>
-
-        {/* Scroll indicator */}
-        <motion.div
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-2"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.5 }}
-        >
-          <span className="text-xs text-gray-500 tracking-widest uppercase">Scroll</span>
-          <motion.div
-            animate={{ y: [0, 8, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
-          >
-            <ArrowDown className="h-4 w-4 text-gray-500" />
-          </motion.div>
-        </motion.div>
       </div>
     </section>
   );
