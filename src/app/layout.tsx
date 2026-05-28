@@ -1,15 +1,17 @@
 // Safeguard for Node 25+ global localStorage issue during SSR
 if (typeof globalThis !== "undefined" && !globalThis.window) {
-  if (globalThis.localStorage && typeof globalThis.localStorage.getItem !== "function") {
+  const globalWithStorage = globalThis as typeof globalThis & { localStorage?: Storage };
+
+  const localStorageObject = globalWithStorage.localStorage;
+
+  if (localStorageObject && typeof localStorageObject.getItem !== "function") {
     try {
-      delete (globalThis as any).localStorage;
-    } catch (e) {
-      try {
-        globalThis.localStorage.getItem = () => null;
-        globalThis.localStorage.setItem = () => {};
-        globalThis.localStorage.removeItem = () => {};
-        globalThis.localStorage.clear = () => {};
-      } catch (err) {}
+      localStorageObject.getItem = () => null;
+      localStorageObject.setItem = () => {};
+      localStorageObject.removeItem = () => {};
+      localStorageObject.clear = () => {};
+    } catch {
+      // ignore fallback failure
     }
   }
 }

@@ -11,9 +11,9 @@ import Footer from "@/components/footer"
 
 export default function Home() {
   return (
-    <div className="mesh-gradient min-h-screen selection:bg-indigo-500/30 selection:text-white antialiased">
+    <div className="bg-slate-950 min-h-screen selection:bg-white/10 selection:text-white antialiased text-white">
       <Navigation />
-      
+
       <main className="flex flex-col overflow-x-hidden">
         <section id="home">
           <Hero />
@@ -23,7 +23,7 @@ export default function Home() {
         <Projects />
         <Contact />
       </main>
-      
+
       <Footer />
       <ScrollToTop />
     </div>

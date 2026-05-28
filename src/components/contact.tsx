@@ -72,48 +72,34 @@ export default function Contact() {
   ]
 
   return (
-    <section id="contact" className="py-16 md:py-24 relative overflow-hidden bg-slate-900 border-t border-white/5">
-      {/* Dynamic Background Noise */}
-      <div className="absolute inset-0 noise pointer-events-none opacity-[0.03]" />
-      
-      {/* Background Gradients */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-indigo-500/10 blur-[100px] rounded-full pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-fuchsia-500/10 blur-[100px] rounded-full pointer-events-none" />
-
-      <div className="container mx-auto px-4 sm:px-6 relative z-10">
+    <section id="contact" className="py-16 md:py-24 bg-slate-950 border-t border-white/5">
+      <div className="container mx-auto px-4 sm:px-6">
         <motion.div
-           initial={{ opacity: 0, y: 30 }}
-           whileInView={{ opacity: 1, y: 0 }}
-           viewport={{ once: true, margin: "-100px" }}
-           transition={{ duration: 0.6 }}
-           className="text-center mb-16 md:mb-24"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16 md:mb-24"
         >
-          <h2 className="text-sm font-bold tracking-widest text-indigo-400 uppercase mb-3 text-center">
-            Let&apos;s Talk
-          </h2>
-          <h3 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-6 text-center text-balance mx-auto">
-            Get In <span className="gradient-text">Touch</span>
-          </h3>
-          <div className="section-divider" />
-          <p className="text-gray-400 mt-6 max-w-2xl mx-auto text-lg leading-relaxed text-center">
-             Whether you have a question, a project proposal, or just want to say hi, 
-             my inbox is always open.
+          <p className="text-sm font-semibold uppercase tracking-[0.35em] text-white/60 mb-4">Contact</p>
+          <h2 className="text-4xl sm:text-5xl font-bold text-white">Let&apos;s build something together</h2>
+          <p className="text-gray-400 mx-auto mt-5 max-w-2xl text-base leading-relaxed">
+            Whether it&apos;s a new project, collaboration, or support request, I&apos;m ready to help. Send a message and I&apos;ll reply as soon as possible.
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-5 gap-12 max-w-6xl mx-auto">
-          {/* Contact Information (Left Column - 2/5 width) */}
+        <div className="grid gap-8 lg:grid-cols-[1.15fr_1.85fr] items-start">
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
+            viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.6 }}
-            className="lg:col-span-2 space-y-6"
+            className="space-y-8"
           >
-            <div className="mb-8">
-              <h3 className="text-2xl font-semibold text-white mb-4">Contact Information</h3>
+            <div className="rounded-[2rem] border border-white/10 bg-slate-900/90 p-6 shadow-[0_25px_80px_rgba(0,0,0,0.3)]">
+              <h3 className="text-2xl font-semibold text-white mb-4">Reach out directly</h3>
               <p className="text-gray-400 leading-relaxed">
-                Fill up the form and I will get back to you within 24 hours.
+                I&apos;m available for freelance and full-time opportunities. Reach out for a quick quote, collaboration, or just a friendly chat.
               </p>
             </div>
 
@@ -124,134 +110,132 @@ export default function Contact() {
                   href={info.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`flex items-start p-5 sm:p-6 rounded-2xl glass-card border ${info.border} hover:bg-white/[0.04] transition-all duration-300 group shadow-sm hover:shadow-md`}
+                  className="group flex items-start gap-4 rounded-3xl border border-white/10 bg-slate-900/80 p-5 transition hover:bg-white/5"
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
+                  transition={{ delay: index * 0.08 }}
                 >
-                  <div className={`p-4 rounded-xl ${info.bg} ${info.color} mr-5 group-hover:scale-110 transition-transform duration-300`}>
-                    <info.icon className="w-6 h-6" />
+                  <div className={`flex h-14 w-14 items-center justify-center rounded-3xl ${info.bg} ${info.color}`}>
+                    <info.icon className="h-6 w-6" />
                   </div>
-                  <div className="flex flex-col justify-center h-full pt-1">
-                    <h4 className="text-white font-medium text-lg leading-none mb-2">{info.title}</h4>
-                    <span className="text-gray-400 group-hover:text-gray-200 transition-colors">{info.value}</span>
+                  <div>
+                    <p className="text-sm uppercase tracking-[0.3em] text-gray-500 mb-2">{info.title}</p>
+                    <p className="text-base font-medium text-white">{info.value}</p>
                   </div>
                 </motion.a>
               ))}
             </div>
-            
-            <div className="mt-12 glass p-6 rounded-2xl border border-white/5 bg-gradient-to-br from-indigo-500/5 to-purple-500/5">
-               <h4 className="text-white font-medium mb-2">Available for freelance and full-time roles</h4>
-               <p className="text-sm text-gray-400">Open to exciting projects and collaborations in 2026.</p>
+
+            <div className="rounded-3xl border border-white/10 bg-slate-900/80 p-6">
+              <h4 className="text-lg font-semibold text-white mb-3">Open for new work</h4>
+              <p className="text-gray-400 leading-relaxed">
+                I&apos;m actively looking for challenging projects with teams who care about polished UX, maintainable code, and strong performance.
+              </p>
             </div>
           </motion.div>
 
-          {/* Contact Form (Right Column - 3/5 width) */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
+            viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.6 }}
-            className="lg:col-span-3"
           >
-            <Card className="glass-card border border-white/10 shadow-xl overflow-hidden rounded-2xl">
-              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500" />
-              <CardHeader className="pt-6 sm:pt-8 px-5 sm:px-6 md:px-8">
-                <CardTitle className="text-2xl text-white">Send me a message</CardTitle>
-                <CardDescription className="text-gray-400 mt-2 text-base">
-                  I&apos;m here to help and answer any questions you might have.
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="px-6 md:px-8 pb-8">
+            <div className="rounded-[2rem] border border-white/10 bg-slate-900/90 shadow-[0_25px_80px_rgba(0,0,0,0.3)] overflow-hidden">
+              <div className="bg-slate-950/90 px-6 py-6 sm:px-8">
+                <h3 className="text-2xl font-semibold text-white">Send a message</h3>
+                <p className="text-gray-400 mt-2">I&apos;ll reply within 24 hours on business days.</p>
+              </div>
+
+              <div className="px-6 pb-8 sm:px-8">
                 <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="space-y-2">
-                      <label className="text-gray-300 text-sm font-medium ml-1 block">First Name</label>
-                      <Input 
-                        name="firstName" 
-                        required 
-                        placeholder="John" 
-                        className="bg-slate-800/50 border-white/10 text-white placeholder:text-gray-500 h-12 rounded-xl focus-visible:ring-indigo-500 focus-visible:ring-offset-slate-900 transition-all" 
+                  <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+                    <label className="block">
+                      <span className="text-sm font-medium text-gray-300">First Name</span>
+                      <Input
+                        name="firstName"
+                        required
+                        placeholder="John"
+                        className="mt-2 bg-slate-800/80 border-white/10 text-white placeholder:text-gray-500 h-14 rounded-3xl focus-visible:ring-indigo-500 focus-visible:ring-offset-slate-950 transition"
                       />
-                    </div>
-                    <div className="space-y-2">
-                      <label className="text-gray-300 text-sm font-medium ml-1 block">Last Name</label>
-                      <Input 
-                        name="lastName" 
-                        required 
-                        placeholder="Doe" 
-                        className="bg-slate-800/50 border-white/10 text-white placeholder:text-gray-500 h-12 rounded-xl focus-visible:ring-indigo-500 focus-visible:ring-offset-slate-900 transition-all" 
+                    </label>
+                    <label className="block">
+                      <span className="text-sm font-medium text-gray-300">Last Name</span>
+                      <Input
+                        name="lastName"
+                        required
+                        placeholder="Doe"
+                        className="mt-2 bg-slate-800/80 border-white/10 text-white placeholder:text-gray-500 h-14 rounded-3xl focus-visible:ring-indigo-500 focus-visible:ring-offset-slate-950 transition"
                       />
-                    </div>
+                    </label>
                   </div>
 
-                  <div className="space-y-2">
-                    <label className="text-gray-300 text-sm font-medium ml-1 block">Email Address</label>
-                    <Input 
-                      name="email" 
-                      type="email" 
-                      required 
-                      placeholder="john@example.com" 
-                      className="bg-slate-800/50 border-white/10 text-white placeholder:text-gray-500 h-12 rounded-xl focus-visible:ring-indigo-500 focus-visible:ring-offset-slate-900 transition-all" 
+                  <label className="block">
+                    <span className="text-sm font-medium text-gray-300">Email Address</span>
+                    <Input
+                      name="email"
+                      type="email"
+                      required
+                      placeholder="john@example.com"
+                      className="mt-2 bg-slate-800/80 border-white/10 text-white placeholder:text-gray-500 h-14 rounded-3xl focus-visible:ring-indigo-500 focus-visible:ring-offset-slate-950 transition"
                     />
-                  </div>
+                  </label>
 
-                  <div className="space-y-2">
-                    <label className="text-gray-300 text-sm font-medium ml-1 block">Subject</label>
-                    <Input 
-                      name="subject" 
-                      required 
-                      placeholder="Project Inquiry" 
-                      className="bg-slate-800/50 border-white/10 text-white placeholder:text-gray-500 h-12 rounded-xl focus-visible:ring-indigo-500 focus-visible:ring-offset-slate-900 transition-all" 
+                  <label className="block">
+                    <span className="text-sm font-medium text-gray-300">Subject</span>
+                    <Input
+                      name="subject"
+                      required
+                      placeholder="Project Inquiry"
+                      className="mt-2 bg-slate-800/80 border-white/10 text-white placeholder:text-gray-500 h-14 rounded-3xl focus-visible:ring-indigo-500 focus-visible:ring-offset-slate-950 transition"
                     />
-                  </div>
+                  </label>
 
-                  <div className="space-y-2">
-                    <label className="text-gray-300 text-sm font-medium ml-1 block">Message</label>
-                    <Textarea 
-                      name="message" 
-                      required 
-                      placeholder="Tell me about your project or inquiry..." 
-                      rows={6} 
-                      className="bg-slate-800/50 border-white/10 text-white placeholder:text-gray-500 rounded-xl resize-none focus-visible:ring-indigo-500 focus-visible:ring-offset-slate-900 transition-all p-4" 
+                  <label className="block">
+                    <span className="text-sm font-medium text-gray-300">Message</span>
+                    <Textarea
+                      name="message"
+                      required
+                      placeholder="Tell me about your project or inquiry..."
+                      rows={6}
+                      className="mt-2 bg-slate-800/80 border-white/10 text-white placeholder:text-gray-500 rounded-3xl resize-none focus-visible:ring-indigo-500 focus-visible:ring-offset-slate-950 transition p-4"
                     />
-                  </div>
+                  </label>
 
-                  <Button 
-                    disabled={loading} 
-                    className="w-full glow-button shadow-lg shadow-indigo-500/20 text-white h-14 rounded-xl font-semibold text-lg hover:-translate-y-1 transition-transform duration-300"
+                  <Button
+                    disabled={loading}
+                    className="w-full rounded-3xl bg-white/5 border border-white/10 py-4 text-base font-semibold text-white shadow-xl shadow-indigo-500/10 transition hover:bg-white/10"
                   >
                     {loading ? (
-                       <span className="flex items-center gap-2">
-                          <Loader2 className="w-5 h-5 animate-spin" /> Sending Message...
-                       </span>
+                      <span className="inline-flex items-center justify-center gap-2">
+                        <Loader2 className="h-5 w-5 animate-spin" /> Sending...
+                      </span>
                     ) : (
-                       <span className="flex items-center gap-2">
-                          <Send className="w-5 h-5 mr-2" /> Send Message
-                       </span>
+                      <span className="inline-flex items-center justify-center gap-2">
+                        <Send className="h-5 w-5" /> Send Message
+                      </span>
                     )}
                   </Button>
 
                   <AnimatePresence>
                     {message && (
                       <motion.div
-                         initial={{ opacity: 0, y: -10, height: 0 }}
-                         animate={{ opacity: 1, y: 0, height: "auto" }}
-                         exit={{ opacity: 0, height: 0 }}
-                         className={`p-4 rounded-xl text-center text-sm font-medium border ${
-                           message.isError 
-                             ? "bg-red-500/10 text-red-400 border-red-500/20" 
-                             : "bg-emerald-500/10 text-emerald-400 border-emerald-500/20"
-                         }`}
+                        initial={{ opacity: 0, y: -10, height: 0 }}
+                        animate={{ opacity: 1, y: 0, height: "auto" }}
+                        exit={{ opacity: 0, height: 0 }}
+                        className={`rounded-3xl border px-4 py-3 text-center text-sm font-medium ${
+                          message.isError
+                            ? "border-red-500/20 bg-red-500/10 text-red-300"
+                            : "border-emerald-500/20 bg-emerald-500/10 text-emerald-300"
+                        }`}
                       >
-                         {message.text}
+                        {message.text}
                       </motion.div>
                     )}
                   </AnimatePresence>
                 </form>
-              </CardContent>
-            </Card>
+              </div>
+            </div>
           </motion.div>
         </div>
       </div>
