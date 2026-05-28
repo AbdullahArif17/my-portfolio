@@ -4,7 +4,6 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { ExternalLink, Github, Loader2 } from "lucide-react";
 import { client, urlFor, featuredProjectsQuery } from "@/sanity/lib/sanity";
 import type { SanityProject } from "@/types/sanity";

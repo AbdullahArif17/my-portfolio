@@ -97,7 +97,7 @@ export default function Hero() {
               </a>
               <a href="#contact" className="w-full sm:w-auto">
                 <Button variant="outline" className="w-full sm:w-auto text-white border border-white/10 hover:bg-white/[0.06] px-6 py-3 rounded-xl transition-all duration-300">
-                  Let's Talk
+                  Let&apos;s Talk
                 </Button>
               </a>
             </div>
