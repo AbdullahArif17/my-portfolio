@@ -1,18 +1,21 @@
-// Safeguard for Node 25+ global localStorage issue during SSR
+// Safeguard for Node 22+ / Node 25+ global localStorage issue during SSR
 if (typeof globalThis !== "undefined" && !globalThis.window) {
-  const globalWithStorage = globalThis as typeof globalThis & { localStorage?: Storage };
-
-  const localStorageObject = globalWithStorage.localStorage;
-
-  if (localStorageObject && typeof localStorageObject.getItem !== "function") {
-    try {
-      localStorageObject.getItem = () => null;
-      localStorageObject.setItem = () => {};
-      localStorageObject.removeItem = () => {};
-      localStorageObject.clear = () => {};
-    } catch {
-      // ignore fallback failure
-    }
+  try {
+    Object.defineProperty(globalThis, "localStorage", {
+      get() {
+        return {
+          getItem: () => null,
+          setItem: () => {},
+          removeItem: () => {},
+          clear: () => {},
+          key: () => null,
+          length: 0,
+        };
+      },
+      configurable: true,
+    });
+  } catch (e) {
+    // ignore fallback failure
   }
 }
 
@@ -20,6 +23,7 @@ import type { Metadata } from "next";
 import { Inter, Roboto } from "next/font/google";
 import "./globals.css";
 import Analytics from "@/components/analytics";
+import CustomCursor from "@/components/custom-cursor";
 
 const geistSans = Inter({
   variable: "--font-geist-sans",
@@ -29,11 +33,12 @@ const geistSans = Inter({
 const geistMono = Roboto({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+  weight: ["400", "700"],
 });
 
 export const metadata: Metadata = {
   title: "Abdullah Arif - Full Stack Web Developer",
-  description: "Passionate Full Stack Web Developer specializing in React, Next.js, and modern web technologies. Creating innovative web solutions with exceptional user experiences.",
+  description: "Passionate Full Stack Web Developer specializing in React, Next.js, and modern MERN technologies. Creating innovative web solutions with exceptional user experiences.",
   keywords: ["Web Developer", "Full Stack", "React", "Next.js", "TypeScript", "Portfolio"],
   authors: [{ name: "Abdullah Arif" }],
   creator: "Abdullah Arif",
@@ -49,7 +54,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Abdullah Arif - Full Stack Web Developer",
-    description: "Passionate Full Stack Web Developer specializing in React, Next.js, and modern web technologies.",
+    description: "Passionate Full Stack Web Developer specializing in React, Next.js, and modern MERN technologies.",
     url: 'https://my-portfolio-nine-chi-62.vercel.app/',
     siteName: 'Abdullah Arif Portfolio',
     images: [
@@ -66,7 +71,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: "Abdullah Arif - Full Stack Web Developer",
-    description: "Passionate Full Stack Web Developer specializing in React, Next.js, and modern web technologies.",
+    description: "Passionate Full Stack Web Developer specializing in React, Next.js, and modern MERN technologies.",
     images: ['/me.jpg'],
     creator: '@your_twitter_handle',
   },
@@ -92,10 +97,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en" className="dark scroll-smooth">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-black text-white`}
       >
+        <CustomCursor />
         {children}
         <Analytics />
       </body>

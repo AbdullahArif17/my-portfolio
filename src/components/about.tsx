@@ -1,158 +1,136 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Code, Palette, Zap, Users, Terminal, Monitor, Server } from "lucide-react";
+import Image from "next/image";
+import {
+  FileCode,
+  FileCode2,
+  Code,
+  Activity,
+  SquareActivity,
+  Wind,
+  Terminal,
+  Server,
+  Package,
+  Database,
+  Zap,
+  Cloud,
+} from "lucide-react";
+
+const skillItems = [
+  { label: "HTML", icon: FileCode2 },
+  { label: "CSS", icon: FileCode },
+  { label: "Tailwindcss", icon: Wind },
+  { label: "JAVASCRIPT", icon: Code },
+  { label: "REACT.JS", icon: SquareActivity },
+  { label: "REACT NATIVE", icon: Activity },
+  { label: "NEXT.JS", icon: Terminal },
+  { label: "NODE.JS", icon: Server },
+  { label: "EXPRESS.JS", icon: Package },
+  { label: "MONGODB", icon: Database },
+  { label: "FIREBASE", icon: Zap },
+  { label: "AXIOS", icon: Cloud },
+];
 
 export default function About() {
-  const stats = [
-    { label: "Years Experience", value: "2+" },
-    { label: "Projects Built", value: "20+" },
-    { label: "Technologies", value: "15+" },
-    { label: "Client Satisfaction", value: "100%" },
-  ];
-
-  const features = [
-    {
-      icon: Code,
-      title: "Clean Architecture",
-      description: "Writing maintainable, scalable, and efficient code following clean code principles.",
-    },
-    {
-      icon: Palette,
-      title: "Modern UI/UX",
-      description: "Creating beautiful, intuitive interfaces that provide exceptional user experiences.",
-    },
-    {
-      icon: Zap,
-      title: "High Performance",
-      description: "Optimizing applications for maximum speed, accessibility, and SEO visibility.",
-    },
-    {
-      icon: Users,
-      title: "Collaborative Teamwork",
-      description: "Working effectively in teams using modern agile development workflows and tools.",
-    },
-  ];
-
   return (
-    <section id="about" className="py-16 md:py-24 relative overflow-hidden">
-      {/* Background elements */}
-      <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-white/5 blur-[120px] rounded-full pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-1/3 h-1/3 bg-slate-100/5 blur-[120px] rounded-full pointer-events-none" />
-
-      <div className="container mx-auto px-4 sm:px-6 relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16 md:mb-24"
-        >
-          <h2 className="text-sm font-bold tracking-widest text-slate-400 uppercase mb-3">
-            Discover
-          </h2>
-          <h3 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-6">
-            About Me
-          </h3>
-          <div className="section-divider border-t border-slate-800 opacity-70 mx-auto w-24" />
-        </motion.div>
-
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-          {/* Left Column: Text content */}
+    <section id="about" className="py-20 bg-black border-t border-zinc-900 overflow-hidden">
+      <div className="w-[90%] max-w-[1400px] mx-auto">
+        <div className="grid lg:grid-cols-[1.2fr_0.8fr] gap-12 lg:gap-16 items-start">
+          
+          {/* Left Column: Skills Grid & About Paragraph */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.6 }}
-            className="space-y-8"
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="space-y-12"
           >
-            <div>
-              <h4 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-6 leading-tight">
-                A passionate developer turning complex problems into elegant solutions.
-              </h4>
-              <div className="space-y-4 text-gray-400 leading-relaxed">
-                <p>
-                  I&apos;m a motivated second-year Computer Science student enrolled in the Governor Sindh IT Program. 
-                  My journey in tech began with a deep curiosity about how things work on the web, which quickly 
-                  evolved into a passion for building robust, scalable applications.
-                </p>
-                <p>
-                  Having completed intensive training in modern web technologies including <span className="text-gray-200 font-medium">TypeScript, Next.js, and Python</span>, 
-                  I currently focus on creating seamless full-stack experiences. I bridge the gap between aesthetic 
-                  design and functional programming.
-                </p>
-                <p>
-                  Beyond writing code, I&apos;m continuously expanding my knowledge horizons into Artificial Intelligence 
-                  and Cloud Computing to stay at the forefront of technological innovation.
-                </p>
+            <div className="space-y-6">
+              <h2 className="text-xl font-bold uppercase tracking-widest text-white">
+                Skills:
+              </h2>
+              
+              {/* Flat rectangular skill badges */}
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                {skillItems.map((skill, index) => {
+                  const Icon = skill.icon;
+                  return (
+                    <motion.div
+                      key={skill.label}
+                      initial={{ opacity: 0, y: 15 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.4, delay: index * 0.05 }}
+                      className="flex items-center gap-3 border border-zinc-800 bg-[#070708] px-4 py-3 rounded-none text-white hover:shadow-[0_0_25px_rgba(139,92,246,0.15)] hover:border-[#8b5cf6]/50 hover:-translate-y-[2px] transition duration-300"
+                    >
+                      <Icon className="h-5 w-5 text-zinc-400" />
+                      <span className="font-bold text-[11px] sm:text-xs tracking-wider uppercase">
+                        {skill.label}
+                      </span>
+                    </motion.div>
+                  );
+                })}
               </div>
             </div>
 
-            {/* Stats Row */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 py-6 border-y border-white/10">
-              {stats.map((stat) => (
-                <div key={stat.label} className="rounded-3xl bg-slate-950/80 p-5 text-center sm:text-left">
-                  <div className="text-3xl font-bold text-white mb-1">{stat.value}</div>
-                  <div className="text-xs text-slate-400 uppercase tracking-wider">{stat.label}</div>
-                </div>
-              ))}
-            </div>
+            {/* About Paragraph below the grid */}
+            <div className="border-t border-zinc-900 pt-8 space-y-6">
+              <p className="text-zinc-400 text-sm sm:text-base leading-relaxed tracking-wide">
+                I&apos;m committed to delivering high-quality code and efficient solutions that meet client needs. 
+                Whether it&apos;s developing a seamless user interface, designing robust APIs, or implementing efficient 
+                CI/CD pipelines, I bring a comprehensive approach to each project.
+              </p>
 
-            {/* Action List */}
-            <div className="space-y-3">
-              {[
-                { icon: Terminal, text: "Frontend Development (React/Next.js)" },
-                { icon: Server, text: "Backend Architecture & APIs" },
-                { icon: Monitor, text: "Responsive UI/UX Engineering" },
-              ].map((item, i) => (
-                <motion.div 
-                  key={i} 
-                  className="flex items-center gap-3 text-gray-300"
-                  initial={{ opacity: 0, x: -10 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.2 + i * 0.1 }}
-                >
-                  <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center text-white ring-1 ring-white/10">
-                    <item.icon className="w-4 h-4" />
-                  </div>
-                  <span className="font-medium text-slate-100">{item.text}</span>
-                </motion.div>
-              ))}
+              {/* Mini experience timeline — unique to this portfolio */}
+              <div className="space-y-4">
+                <p className="text-[10px] font-black uppercase tracking-[0.25em] text-[#8b5cf6]">Journey:</p>
+                {[
+                  { year: "2024", title: "Governor Sindh IT Initiative", desc: "Enrolled in intensive MERN stack program" },
+                  { year: "2025", title: "Full Stack Developer", desc: "Building production apps & freelance projects" },
+                  { year: "NOW", title: "Exploring AI & Cloud", desc: "Expanding into intelligent, scalable systems" },
+                ].map((item, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, x: -10 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.1 }}
+                    className="flex items-start gap-4"
+                  >
+                    <div className="flex flex-col items-center">
+                      <span className="w-2 h-2 rounded-full bg-[#8b5cf6] shadow-[0_0_8px_#8b5cf6]" />
+                      {i < 2 && <span className="w-px h-8 bg-zinc-800" />}
+                    </div>
+                    <div className="-mt-1">
+                      <p className="text-[10px] font-bold text-zinc-500 uppercase tracking-wider">{item.year}</p>
+                      <p className="text-sm font-bold text-white">{item.title}</p>
+                      <p className="text-xs text-zinc-500">{item.desc}</p>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
             </div>
           </motion.div>
 
-          {/* Right Column: Feature Cards */}
+          {/* Right Column: Developer portrait photo with status overlay */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.6 }}
-            className="grid sm:grid-cols-2 gap-4 lg:gap-6"
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="w-full relative aspect-[3/4] lg:aspect-auto lg:h-[650px] bg-zinc-950 overflow-hidden border border-zinc-800 group"
           >
-            {features.map((feature, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="glass-card rounded-3xl p-6 overflow-hidden"
-              >
-                <div className="relative z-10">
-                  <div className="w-12 h-12 rounded-2xl mb-4 flex items-center justify-center bg-white/10 text-white ring-1 ring-white/10 shadow-sm">
-                    <feature.icon className="h-6 w-6" />
-                  </div>
-                  <h4 className="text-lg font-semibold text-white mb-2">
-                    {feature.title}
-                  </h4>
-                  <p className="text-sm text-slate-400 leading-relaxed">
-                    {feature.description}
-                  </p>
-                </div>
-              </motion.div>
-            ))}
+            <Image
+              src="/me.jpg"
+              alt="Abdullah Arif portrait"
+              fill
+              sizes="(max-width: 1024px) 100vw, 40vw"
+              className="object-cover rounded-none group-hover:scale-[1.03] transition-transform duration-700"
+              priority
+            />
           </motion.div>
+
         </div>
       </div>
     </section>

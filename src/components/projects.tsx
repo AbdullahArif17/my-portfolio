@@ -3,63 +3,85 @@
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Button } from "@/components/ui/button";
-import { ExternalLink, Github, Loader2 } from "lucide-react";
+import { ExternalLink, Github, ArrowUpRight, Grid, List } from "lucide-react";
 import { client, urlFor, featuredProjectsQuery } from "@/sanity/lib/sanity";
 import type { SanityProject } from "@/types/sanity";
 
-// Fallback static data if Sanity is not connected
+// Realistic fallback projects reflecting Ahmed Shahid / Abdullah Arif high-tier projects
 const fallbackProjects: SanityProject[] = [
   {
     _id: "1",
-    title: "E-Commerce Dashboard",
-    description: "A full-stack admin dashboard for managing products, orders, and customers with real-time analytics.",
+    title: "Food Stall Management System",
+    description: "A robust full-stack management system built for local food vendors, featuring secure checkouts, live vendor charts, and inventory tracking dashboards.",
     image: { asset: { _ref: "", _type: "reference" }, _type: "image" },
-    technologies: ["Next.js", "TypeScript", "TailwindCSS", "Prisma"],
-    liveUrl: "#",
+    technologies: ["React", "Express JS", "MongoDB", "Cloudinary", "Shad CN", "Chart JS"],
+    liveUrl: "https://github.com/AbdullahArif17",
     githubUrl: "https://github.com/AbdullahArif17",
     featured: true,
     order: 1,
   },
   {
     _id: "2",
-    title: "AI Content Generator",
-    description: "An AI-powered application that generates blog posts, social media content, and marketing copy.",
+    title: "Weather App — Real-Time",
+    description: "A real-time weather details service delivering live forecasts based on current locations, featuring wind status, sunrise tracking, and dynamic icons.",
     image: { asset: { _ref: "", _type: "reference" }, _type: "image" },
-    technologies: ["React", "Node.js", "OpenAI API", "MongoDB"],
-    liveUrl: "#",
+    technologies: ["React", "Axios", "Tailwind CSS", "Ant Design", "Open-Weather API"],
+    liveUrl: "https://github.com/AbdullahArif17",
     githubUrl: "https://github.com/AbdullahArif17",
     featured: true,
     order: 2,
   },
   {
     _id: "3",
-    title: "Real-time Chat App",
-    description: "A modern messaging application featuring real-time communication, media sharing, and group chats.",
+    title: "Saylani Welfare Mobile App",
+    description: "A cutting edge mobile app streamlining food distributions, tracking charity funds, and providing instant updates using clean react native code.",
     image: { asset: { _ref: "", _type: "reference" }, _type: "image" },
-    technologies: ["Next.js", "Socket.io", "Express", "PostgreSQL"],
-    liveUrl: "#",
+    technologies: ["React Native", "Expo", "Expo-Camera", "Tailwind CSS", "Zod", "Axios"],
+    liveUrl: "https://github.com/AbdullahArif17",
     githubUrl: "https://github.com/AbdullahArif17",
     featured: true,
     order: 3,
   },
   {
     _id: "4",
-    title: "Portfolio Website",
-    description: "A responsive portfolio to showcase projects and skills, featuring a modern glassmorphism design.",
+    title: "Nike Store Showcase",
+    description: "A premium responsive landing page featuring smooth scrolling, interactive cards, bold color patterns, and rich visual transitions.",
     image: { asset: { _ref: "", _type: "reference" }, _type: "image" },
-    technologies: ["Next.js", "Framer Motion", "Tailwind CSS"],
-    liveUrl: "#",
+    technologies: ["React", "Tailwind CSS", "AOS", "Framer Motion", "Typed JS"],
+    liveUrl: "https://github.com/AbdullahArif17",
     githubUrl: "https://github.com/AbdullahArif17",
     featured: true,
     order: 4,
+  },
+  {
+    _id: "5",
+    title: "Sushi Master Restaurant",
+    description: "A minimalist restaurant concept page designed with smooth keyframe animations, grid arrangements, and pixel-perfect responsiveness.",
+    image: { asset: { _ref: "", _type: "reference" }, _type: "image" },
+    technologies: ["HTML5", "CSS3", "JavaScript", "Animate.css"],
+    liveUrl: "https://github.com/AbdullahArif17",
+    githubUrl: "https://github.com/AbdullahArif17",
+    featured: true,
+    order: 5,
+  },
+  {
+    _id: "6",
+    title: "Taskify — Full-Stack To-Do",
+    description: "A modern workspace management dashboard that empowers teams to organize tasks, assign roles, and track project deadlines in real time.",
+    image: { asset: { _ref: "", _type: "reference" }, _type: "image" },
+    technologies: ["Next JS", "Typescript", "Express JS", "MongoDB", "Shad CN", "Tailwind CSS"],
+    liveUrl: "https://github.com/AbdullahArif17",
+    githubUrl: "https://github.com/AbdullahArif17",
+    featured: true,
+    order: 6,
   }
 ];
 
 export default function Projects() {
   const [projects, setProjects] = useState<SanityProject[]>([]);
+  const [activeProjectIndex, setActiveProjectIndex] = useState(0);
+  const [showGrid, setShowGrid] = useState(true);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchProjects = async () => {
@@ -69,11 +91,9 @@ export default function Projects() {
           setProjects(data);
         } else {
           setProjects(fallbackProjects);
-          setError("Using fallback static data (Sanity dataset might be empty)");
         }
       } catch (err) {
-        setError("Failed to load from Sanity. Using fallback data.");
-        console.error("Error fetching projects:", err);
+        console.error("Error fetching projects from Sanity:", err);
         setProjects(fallbackProjects);
       } finally {
         setLoading(false);
@@ -83,163 +103,281 @@ export default function Projects() {
     fetchProjects();
   }, []);
 
+  const activeProject = projects[activeProjectIndex] || fallbackProjects[0];
+
   return (
-    <section id="projects" className="py-16 md:py-24 bg-slate-950">
-      <div className="container mx-auto px-4 sm:px-6">
+    <section id="projects" className="py-24 bg-black border-t border-zinc-900 overflow-hidden">
+      <div className="w-[90%] max-w-[1400px] mx-auto">
+        
+        {/* Title */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16 md:mb-24"
+          className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6"
         >
-          <h2 className="text-sm font-semibold uppercase tracking-[0.35em] text-white/60 mb-4">
-            Projects
-          </h2>
-          <h3 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4">
-            Featured Work
-          </h3>
-          <p className="text-gray-400 mx-auto max-w-xl text-sm sm:text-base leading-relaxed">
-            A curated showcase of recent projects using modern UI, production-ready architecture, and practical tooling.
-          </p>
-          <AnimatePresence>
-            {error && (
-              <motion.div
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: "auto" }}
-                className="mt-6 inline-flex items-center justify-center rounded-2xl border border-amber-500/20 bg-amber-500/10 px-4 py-2 text-sm text-amber-300"
-              >
-                {error}
-              </motion.div>
-            )}
-          </AnimatePresence>
+          <div>
+            <p className="text-xs font-bold uppercase tracking-[0.25em] text-[#8b5cf6] mb-3">
+              Projects:
+            </p>
+            <h2 className="text-3xl md:text-5xl font-black uppercase tracking-tight text-white">
+              Curated Works
+            </h2>
+          </div>
+
+          {/* Toggle buttons */}
+          <div className="flex items-center gap-3">
+            <button
+              onClick={() => setShowGrid(false)}
+              className={`flex items-center gap-2 px-4 py-2 text-xs font-bold uppercase tracking-wider transition-all border ${
+                !showGrid
+                  ? "bg-white text-black border-white"
+                  : "bg-transparent text-zinc-400 border-zinc-800 hover:text-white"
+              }`}
+            >
+              <List className="h-4 w-4" /> Showcase List
+            </button>
+            <button
+              onClick={() => setShowGrid(true)}
+              className={`flex items-center gap-2 px-4 py-2 text-xs font-bold uppercase tracking-wider transition-all border ${
+                showGrid
+                  ? "bg-white text-black border-white"
+                  : "bg-transparent text-zinc-400 border-zinc-800 hover:text-white"
+              }`}
+            >
+              <Grid className="h-4 w-4" /> Full Grid 💡
+            </button>
+          </div>
         </motion.div>
 
         {loading ? (
-          <div className="flex min-h-[300px] flex-col items-center justify-center rounded-3xl border border-white/10 bg-slate-900/80 p-12">
-            <Loader2 className="h-10 w-10 animate-spin text-white/70 mb-4" />
-            <p className="text-gray-400">Loading projects...</p>
+          <div className="flex h-96 flex-col items-center justify-center border border-zinc-800 bg-[#070708]">
+            <div className="h-8 w-8 animate-spin rounded-full border-2 border-zinc-500 border-t-white" />
+            <p className="text-zinc-500 mt-4 text-sm font-semibold tracking-wider uppercase">Loading projects...</p>
           </div>
         ) : (
-          <div className="grid gap-6 grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
-            {projects.map((project, index) => (
+          <AnimatePresence mode="wait">
+            {!showGrid ? (
+              /* --- SHOWCASE LIST VIEW (Ahmed Shahid Homepage Layout) --- */
               <motion.div
-                key={project._id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.5, delay: index * 0.08 }}
-                className="group overflow-hidden rounded-[2rem] border border-white/10 bg-slate-900/90 shadow-[0_20px_80px_rgba(0,0,0,0.22)]"
+                key="list-view"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.5 }}
+                className="grid lg:grid-cols-[1fr_1.2fr] gap-12 lg:gap-20 items-start min-h-[500px]"
               >
-                <div className="relative overflow-hidden bg-slate-800">
-                  <div className="relative aspect-[16/9]">
-                    <Image
-                      src={
-                        project.image?.asset?._ref
-                          ? urlFor(project.image)
-                              .width(900)
-                              .height(506)
-                              .quality(90)
-                              .auto("format")
-                              .url()!
-                          : "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='900' height='506' fill='%23111' ><rect width='900' height='506' fill='%23111' /><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' fill='%23888' font-family='Arial' font-size='24'>Project Preview</text></svg>"
-                      }
-                      alt={project.title || "Project preview"}
-                      fill
-                      className="object-cover transition duration-700 group-hover:scale-105"
-                      sizes="(max-width: 768px) 100vw, 33vw"
-                    />
+                {/* Left Column: Value Proposition & Active Preview */}
+                <div className="space-y-10 lg:sticky lg:top-32">
+                  <div className="space-y-4">
+                    <p className="text-xl md:text-2xl font-bold uppercase tracking-tight text-white leading-snug">
+                      Deep expertise in full-stack development, interactive interfaces and scalable APIs.
+                    </p>
+                    <p className="text-zinc-400 text-sm leading-relaxed max-w-lg">
+                      Hover over any project on the right to reveal its details, core technologies, and repository links. I focus on clean code architectures and rich micro-interactions.
+                    </p>
                   </div>
 
-                  <div className="absolute inset-x-0 bottom-0 z-10 flex flex-wrap justify-end gap-3 p-3 sm:p-4 bg-gradient-to-t from-slate-950/95 to-transparent">
-                    {project.liveUrl && project.liveUrl !== "#" && (
-                      <a
-                        href={project.liveUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-slate-900/80 text-white transition hover:bg-slate-800"
-                        aria-label="Open live project"
-                      >
-                        <ExternalLink className="h-4 w-4" />
-                      </a>
-                    )}
-                    {project.githubUrl && (
-                      <a
-                        href={project.githubUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-slate-900/80 text-white transition hover:bg-slate-800"
-                        aria-label="Open project repo"
-                      >
-                        <Github className="h-4 w-4" />
-                      </a>
-                    )}
-                  </div>
+                  {/* Active Project Highlight Block */}
+                  {activeProject && (
+                    <motion.div
+                      key={activeProject._id}
+                      initial={{ opacity: 0, x: -10 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      className="border border-zinc-800 bg-[#070708] p-6 space-y-4 shadow-[0_10px_30px_-15px_rgba(139,92,246,0.15)]"
+                    >
+                      <span className="text-[10px] font-black uppercase tracking-widest text-[#8b5cf6]">
+                        Active Showcase
+                      </span>
+                      <h3 className="text-lg font-black uppercase text-white tracking-wide">
+                        {activeProject.title}
+                      </h3>
+                      <p className="text-zinc-400 text-xs leading-relaxed">
+                        {activeProject.description}
+                      </p>
+                      
+                      {/* Tech stack badge list */}
+                      <div className="flex flex-wrap gap-2 pt-2">
+                        {activeProject.technologies.slice(0, 4).map((tech) => (
+                          <span
+                            key={tech}
+                            className="bg-zinc-900 border border-zinc-800 text-zinc-300 text-[9px] font-black tracking-widest uppercase px-2.5 py-1"
+                          >
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
+
+                      {/* Action buttons */}
+                      <div className="flex items-center gap-4 pt-4 border-t border-zinc-900">
+                        {activeProject.liveUrl && activeProject.liveUrl !== "#" && (
+                          <a
+                            href={activeProject.liveUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-xs font-bold text-white uppercase tracking-wider hover:text-[#8b5cf6] transition-colors flex items-center gap-1.5"
+                          >
+                            Live Demo <ExternalLink className="h-3 w-3" />
+                          </a>
+                        )}
+                        {activeProject.githubUrl && (
+                          <a
+                            href={activeProject.githubUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-xs font-bold text-white uppercase tracking-wider hover:text-[#8b5cf6] transition-colors flex items-center gap-1.5"
+                          >
+                            Source <Github className="h-3 w-3" />
+                          </a>
+                        )}
+                      </div>
+                    </motion.div>
+                  )}
                 </div>
 
-                <div className="space-y-5 p-5 sm:p-6 bg-slate-950">
-                  <div className="space-y-3">
-                    <h4 className="text-xl font-bold text-white">{project.title}</h4>
-                    <p className="text-sm leading-relaxed text-gray-400">{project.description}</p>
-                  </div>
-
-                  <div className="flex flex-wrap gap-2">
-                    {project.technologies.map((tech: string, techIndex: number) => (
-                      <span
-                        key={techIndex}
-                        className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.25em] text-gray-300"
+                {/* Right Column: Dynamic Project Selection List */}
+                <div className="border-t border-zinc-800">
+                  {projects.map((project, index) => {
+                    const isActive = index === activeProjectIndex;
+                    return (
+                      <div
+                        key={project._id}
+                        onMouseEnter={() => setActiveProjectIndex(index)}
+                        className="py-8 border-b border-zinc-800 cursor-pointer flex items-center justify-between group transition-all duration-300 hover:pl-4"
                       >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-
-                  <div className="grid gap-3 sm:grid-cols-2">
-                    {project.liveUrl && project.liveUrl !== "#" && (
-                      <a
-                        href={project.liveUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center justify-center rounded-3xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold text-white transition hover:bg-white/10"
-                      >
-                        View Live
-                      </a>
-                    )}
-                    {project.githubUrl && (
-                      <a
-                        href={project.githubUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center justify-center rounded-3xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold text-white transition hover:bg-white/10"
-                      >
-                        View Code
-                      </a>
-                    )}
-                  </div>
+                        <div className="space-y-2">
+                          <h3
+                            className={`text-xl md:text-2xl font-bold tracking-wider uppercase transition-all duration-300 flex items-center gap-3 ${
+                              isActive
+                                ? "text-[#8b5cf6] font-black"
+                                : "text-zinc-500 group-hover:text-white"
+                            }`}
+                          >
+                            {isActive && (
+                              <motion.span
+                                layoutId="activeProjectDot"
+                                className="inline-block w-2.5 h-2.5 rounded-full bg-[#8b5cf6] shadow-[0_0_10px_#8b5cf6]"
+                                transition={{ type: "spring", stiffness: 350, damping: 28 }}
+                              />
+                            )}
+                            {project.title}
+                          </h3>
+                        </div>
+                        <div className="flex items-center justify-center">
+                          <ArrowUpRight
+                            className={`h-6 w-6 transition-all duration-300 ${
+                              isActive
+                                ? "text-[#8b5cf6] rotate-45"
+                                : "text-zinc-600 group-hover:text-white group-hover:rotate-45"
+                            }`}
+                          />
+                        </div>
+                      </div>
+                    );
+                  })}
                 </div>
               </motion.div>
-            ))}
-          </div>
-        )}
-
-        {!loading && projects.length > 0 && (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="mt-16 text-center"
-          >
-            <a href="https://github.com/AbdullahArif17" target="_blank" rel="noopener noreferrer">
-              <Button
-                variant="outline"
-                size="lg"
-                className="rounded-full border border-white/10 bg-white/5 px-8 py-3 text-white hover:bg-white/10 hover:text-white transition"
+            ) : (
+              /* --- FULL 3-COLUMN DETAILED CARD GRID VIEW (Ahmed Shahid project.html Layout) --- */
+              <motion.div
+                key="grid-view"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.5 }}
+                className="grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
               >
-                View More on GitHub <Github className="ml-2 h-4 w-4" />
-              </Button>
-            </a>
-          </motion.div>
+                {projects.map((project, index) => (
+                  <motion.div
+                    key={project._id}
+                    initial={{ opacity: 0, y: 25 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: index * 0.05 }}
+                    className="flex flex-col border border-zinc-800 bg-[#0a0a0c] rounded-xl overflow-hidden hover:shadow-[0_10px_30px_rgba(139,92,246,0.1)] hover:border-zinc-700 transition duration-300"
+                  >
+                    {/* Image Header with standard dynamic gradient bg */}
+                    <div className="relative aspect-[16/10] bg-gradient-to-tr from-zinc-950 to-zinc-900 border-b border-zinc-800 overflow-hidden group">
+                      {project.image?.asset?._ref ? (
+                        <Image
+                          src={urlFor(project.image).width(800).height(500).quality(90).url()!}
+                          alt={project.title}
+                          fill
+                          className="object-cover transition-transform duration-500 group-hover:scale-105"
+                          sizes="(max-width: 768px) 100vw, 33vw"
+                        />
+                      ) : (
+                        /* Modern CSS vector mock background */
+                        <div className="absolute inset-0 bg-gradient-to-br from-[#8b5cf6]/10 to-indigo-900/10 flex items-center justify-center p-6">
+                          <div className="text-center space-y-2">
+                            <span className="text-[10px] font-black uppercase tracking-widest text-[#8b5cf6] bg-zinc-900 px-3 py-1 border border-zinc-800">
+                              Mockup Preview
+                            </span>
+                            <h4 className="text-zinc-500 font-bold uppercase text-[10px] tracking-widest block pt-2">
+                              {project.title}
+                            </h4>
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Hover floating overlay buttons */}
+                      <div className="absolute bottom-4 right-4 flex items-center gap-2 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        {project.liveUrl && project.liveUrl !== "#" && (
+                          <a
+                            href={project.liveUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex h-8 w-8 items-center justify-center rounded-full bg-black/80 hover:bg-[#8b5cf6] text-white transition-colors"
+                          >
+                            <ExternalLink className="h-4 w-4" />
+                          </a>
+                        )}
+                        {project.githubUrl && (
+                          <a
+                            href={project.githubUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex h-8 w-8 items-center justify-center rounded-full bg-black/80 hover:bg-[#8b5cf6] text-white transition-colors"
+                          >
+                            <Github className="h-4 w-4" />
+                          </a>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* Card Description body */}
+                    <div className="p-6 flex-grow flex flex-col space-y-4 justify-between">
+                      <div className="space-y-2">
+                        <h3 className="text-lg font-black uppercase tracking-wider text-white">
+                          {project.title}
+                        </h3>
+                        <p className="text-zinc-400 text-xs leading-relaxed line-clamp-3">
+                          {project.description}
+                        </p>
+                      </div>
+
+                      {/* Tech Pills */}
+                      <div className="flex flex-wrap gap-1.5 pt-2">
+                        {project.technologies.slice(0, 5).map((tech) => (
+                          <span
+                            key={tech}
+                            className="bg-zinc-900 text-zinc-300 text-[9px] font-bold uppercase tracking-widest px-2.5 py-1 border border-zinc-800"
+                          >
+                            {tech}
+                          </span>
+                        ))}
+                        {project.technologies.length > 5 && (
+                          <span className="bg-zinc-900 text-zinc-400 text-[9px] font-bold uppercase tracking-widest px-2 py-1 border border-zinc-800">
+                            +{project.technologies.length - 5}
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </motion.div>
+            )}
+          </AnimatePresence>
         )}
       </div>
     </section>

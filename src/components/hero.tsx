@@ -1,145 +1,216 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { Github, Linkedin, Facebook, Pencil } from "lucide-react";
-import { motion } from "framer-motion";
-import Image from "next/image";
+import { motion, useMotionValue, useTransform } from "framer-motion";
+import { Code2, ArrowDown } from "lucide-react";
+import { useEffect, useState } from "react";
 
-const socials = [
-  {
-    icon: Github,
-    href: "https://github.com/AbdullahArif17",
-    label: "GitHub",
-  },
-  {
-    icon: Linkedin,
-    href: "https://www.linkedin.com/in/abdullah-arif-89ab862b4/",
-    label: "LinkedIn",
-  },
-  {
-    icon: Facebook,
-    href: "https://www.facebook.com/rayan.arif.50",
-    label: "Facebook",
-  },
+const techLogos = [
+  { name: "React", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
+  { name: "JavaScript", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" },
+  { name: "Node.js", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" },
+  { name: "Express", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg" },
+  { name: "MongoDB", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" },
+  { name: "Next.js", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" },
+  { name: "Tailwind", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg" },
 ];
 
+// Animated counter hook
+function useCounter(end: number, duration: number = 2000) {
+  const [count, setCount] = useState(0);
+  const [started, setStarted] = useState(false);
+
+  useEffect(() => {
+    if (!started) return;
+    let startTime: number;
+    const step = (timestamp: number) => {
+      if (!startTime) startTime = timestamp;
+      const progress = Math.min((timestamp - startTime) / duration, 1);
+      setCount(Math.floor(progress * end));
+      if (progress < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }, [started, end, duration]);
+
+  return { count, start: () => setStarted(true) };
+}
+
 export default function Hero() {
+  const xMouse = useMotionValue(0);
+  const yMouse = useMotionValue(0);
+  const rotateX = useTransform(yMouse, [-300, 300], [3, -3]);
+  const rotateY = useTransform(xMouse, [-300, 300], [-3, 3]);
+
+  const years = useCounter(2, 1800);
+  const projects = useCounter(20, 2000);
+  const tech = useCounter(15, 1600);
+
+  const scrollToProjects = () => {
+    const element = document.querySelector("#projects");
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    xMouse.set(e.clientX - rect.left - rect.width / 2);
+    yMouse.set(e.clientY - rect.top - rect.height / 2);
+  };
+
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 pb-16 md:pt-0 md:pb-0 section-shell">
+    <section
+      id="home"
+      className="relative min-h-screen flex flex-col items-center justify-center bg-black overflow-hidden pt-36 pb-20 select-none"
+      onMouseMove={handleMouseMove}
+    >
+      {/* Ambient Glow Orbs */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
-          className="absolute w-[520px] h-[520px] rounded-full"
-          style={{
-            background: "radial-gradient(circle, rgba(255,255,255,0.14) 0%, transparent 68%)",
-            top: "12%",
-            left: "-8%",
-          }}
-          animate={{ x: [0, 80, 0], y: [0, 40, 0] }}
-          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+          className="absolute w-[500px] h-[500px] rounded-full bg-violet-600/8 blur-[140px]"
+          style={{ top: "8%", left: "5%" }}
+          animate={{ x: [0, 40, 0], y: [0, 20, 0] }}
+          transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
         />
         <motion.div
-          className="absolute w-[580px] h-[580px] rounded-full"
-          style={{
-            background: "radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 72%)",
-            bottom: "-6%",
-            right: "-14%",
-          }}
-          animate={{ x: [0, -90, 0], y: [0, -30, 0] }}
-          transition={{ duration: 24, repeat: Infinity, ease: "linear" }}
+          className="absolute w-[400px] h-[400px] rounded-full bg-fuchsia-500/5 blur-[120px]"
+          style={{ bottom: "15%", right: "8%" }}
+          animate={{ x: [0, -30, 0], y: [0, -15, 0] }}
+          transition={{ duration: 22, repeat: Infinity, ease: "linear" }}
         />
       </div>
 
-      <div className="container mx-auto px-4 sm:px-6 relative z-10">
-        <div className="grid lg:grid-cols-[1.2fr_0.8fr] gap-10 items-center">
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="text-center lg:text-left"
+      {/* Hero Content with 3D tilt */}
+      <motion.div
+        className="w-[90%] max-w-[1400px] mx-auto relative z-10 flex flex-col items-center justify-center flex-grow"
+        style={{ rotateX, rotateY, perspective: 1200 }}
+      >
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="flex flex-col items-center text-center space-y-8"
+        >
+          {/* Small intro label */}
+          <motion.p
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="text-[10px] md:text-xs font-bold uppercase tracking-[0.4em] text-zinc-500 border border-zinc-800 px-5 py-2 rounded-full"
           >
-            <p className="text-sm uppercase tracking-[0.35em] text-gray-500 mb-4">Portfolio</p>
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-white leading-tight mb-4 max-w-3xl mx-auto lg:mx-0">
-              Abdullah Arif
-            </h1>
-            <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 mb-6">
-              <span className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-violet-500 text-white shadow-[0_0_0_12px_rgba(124,58,237,0.08)]">
-                <Pencil className="h-5 w-5" />
-              </span>
-              <p className="text-xl sm:text-2xl text-gray-200 font-medium">
-                MERN Stack Developer focused on clean, scalable digital products.
-              </p>
-            </div>
+            ✦ Available for freelance work
+          </motion.p>
 
-            <div className="flex flex-wrap justify-center lg:justify-start gap-3 mb-8 text-sm sm:text-base">
-              {[
-                "Frontend Development",
-                "Backend Development",
-                "API Integration",
-              ].map((item) => (
-                <span
-                  key={item}
-                  className="rounded-full border border-white/15 px-5 py-2 text-gray-300 transition hover:border-white/30"
-                >
-                  {item}
-                </span>
-              ))}
-            </div>
+          {/* Main Massive Typography Heading */}
+          <h1 className="text-[8.5vw] md:text-[6vw] font-black uppercase tracking-tight text-white leading-[0.9] flex flex-col items-center">
+            <span className="flex items-center justify-center flex-wrap gap-4 md:gap-6">
+              ABDULLAH ARIF
+              <motion.span
+                initial={{ rotate: -20, scale: 0.8 }}
+                animate={{ rotate: 0, scale: 1 }}
+                transition={{ type: "spring", stiffness: 100, delay: 0.4 }}
+                className="inline-flex h-[8vw] w-[8vw] md:h-[5.5vw] md:w-[5.5vw] items-center justify-center rounded-full bg-gradient-to-br from-[#8b5cf6] to-[#6d28d9] text-white shadow-[0_0_50px_rgba(139,92,246,0.3)]"
+              >
+                <Code2 className="h-[4.5vw] w-[4.5vw] md:h-[2.8vw] md:w-[2.8vw] text-white" />
+              </motion.span>
+              HERE !
+            </span>
+            <span className="text-[8.5vw] md:text-[5.5vw] font-black tracking-tight mt-2 block bg-gradient-to-r from-[#a78bfa] via-[#e879f9] to-[#60a5fa] bg-clip-text text-transparent drop-shadow-[0_0_30px_rgba(167,139,250,0.2)]">
+              MERN STACK DEVELOPER
+            </span>
+          </h1>
 
-            <p className="text-gray-400 max-w-xl mx-auto lg:mx-0 leading-relaxed mb-10">
-              I build premium interfaces backed by robust architecture. My focus is on user-centric, responsive, and maintainable solutions for startups and product teams.
-            </p>
+          {/* Subtitle Slogan */}
+          <p className="text-[3.8vw] sm:text-[1.8vw] md:text-[1.1vw] text-zinc-400 font-medium max-w-2xl leading-relaxed tracking-wide">
+            Turning your vision into engaging digital experiences through scalable, robust and revenue-driving web solutions.
+          </p>
 
-            <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-5 justify-center lg:justify-start mb-10">
-              <a href="#projects" className="w-full sm:w-auto">
-                <Button className="w-full sm:w-auto text-white border border-white/10 bg-white/[0.08] hover:bg-white/10 px-6 py-3 rounded-xl transition-all duration-300">
-                  View Projects
-                </Button>
-              </a>
-              <a href="#contact" className="w-full sm:w-auto">
-                <Button variant="outline" className="w-full sm:w-auto text-white border border-white/10 hover:bg-white/[0.06] px-6 py-3 rounded-xl transition-all duration-300">
-                  Let&apos;s Talk
-                </Button>
-              </a>
-            </div>
+          {/* Transparent Outline Pills */}
+          <div className="flex flex-wrap items-center justify-center gap-3 md:gap-4 pt-2">
+            {[
+              "Frontend Development",
+              "Backend Development",
+              "API Integration",
+            ].map((pill, i) => (
+              <motion.span
+                key={pill}
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.6 + i * 0.1 }}
+                className="text-[3vw] sm:text-[1.4vw] md:text-[0.85vw] font-bold uppercase tracking-wider text-white bg-transparent border border-zinc-700 px-6 py-3 rounded-full hover:border-[#8b5cf6] hover:shadow-[0_0_15px_rgba(139,92,246,0.15)] transition-all duration-300 cursor-default"
+              >
+                {pill}
+              </motion.span>
+            ))}
+          </div>
 
-            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3 text-gray-400">
-              {socials.map((social) => (
-                <a
-                  key={social.label}
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/5 transition-colors hover:bg-white/10 hover:text-white"
-                  aria-label={social.label}
-                >
-                  <social.icon className="h-5 w-5" />
-                </a>
-              ))}
-            </div>
-          </motion.div>
-
+          {/* Animated Stats Bar — unique differentiator */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="relative mx-auto w-full max-w-md"
+            whileInView={{ opacity: 1, y: 0 }}
+            onViewportEnter={() => {
+              years.start();
+              projects.start();
+              tech.start();
+            }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.8 }}
+            className="flex items-center gap-6 md:gap-10 pt-6"
           >
-            <div className="absolute inset-0 rounded-[2rem] border border-white/10 bg-white/5 backdrop-blur-xl shadow-[0_35px_120px_rgba(0,0,0,0.4)]" />
-            <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-slate-950/90 p-1">
-              <div className="relative overflow-hidden rounded-[1.75rem] bg-slate-950">
-                <Image
-                  src="/me.jpg"
-                  alt="Abdullah Arif - Web Developer"
-                  width={720}
-                  height={720}
-                  className="w-full h-full object-cover"
-                  priority
-                />
+            {[
+              { value: years.count, suffix: "+", label: "Years Exp" },
+              { value: projects.count, suffix: "+", label: "Projects" },
+              { value: tech.count, suffix: "+", label: "Technologies" },
+            ].map((stat) => (
+              <div key={stat.label} className="text-center">
+                <p className="text-2xl md:text-3xl font-black text-white tabular-nums">
+                  {stat.value}{stat.suffix}
+                </p>
+                <p className="text-[10px] md:text-xs font-bold uppercase tracking-widest text-zinc-500 mt-1">
+                  {stat.label}
+                </p>
               </div>
-            </div>
+            ))}
           </motion.div>
+        </motion.div>
+      </motion.div>
+
+      {/* Marquee Technology Strip */}
+      <div className="w-full overflow-hidden py-6 border-t border-zinc-900/50 mt-auto">
+        <div className="max-w-[70vw] md:max-w-[45vw] mx-auto overflow-hidden relative">
+          <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-black to-transparent z-10" />
+          <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-black to-transparent z-10" />
+
+          <div className="flex items-center gap-12 whitespace-nowrap animate-marquee">
+            {[...techLogos, ...techLogos].map((tech, index) => (
+              <div
+                key={index}
+                className="inline-flex items-center gap-2 grayscale opacity-25 hover:grayscale-0 hover:opacity-100 transition-all duration-500"
+              >
+                <img
+                  src={tech.src}
+                  alt={tech.name}
+                  className="h-5 w-5 md:h-7 md:w-7 object-contain"
+                />
+                <span className="text-white text-[10px] md:text-xs font-semibold tracking-wider uppercase">
+                  {tech.name}
+                </span>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
+
+      <style jsx global>{`
+        @keyframes marquee {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+        .animate-marquee {
+          display: flex;
+          width: max-content;
+          animation: marquee 20s linear infinite;
+        }
+      `}</style>
     </section>
   );
 }
