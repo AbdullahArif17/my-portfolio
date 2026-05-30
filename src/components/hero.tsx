@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useMotionValue, useTransform } from "framer-motion";
-import { Code2, ArrowDown } from "lucide-react";
+import { Code2 } from "lucide-react";
 import { useEffect, useState } from "react";
 
 const techLogos = [
@@ -44,12 +44,7 @@ export default function Hero() {
   const projects = useCounter(20, 2000);
   const tech = useCounter(15, 1600);
 
-  const scrollToProjects = () => {
-    const element = document.querySelector("#projects");
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-  };
+
 
   const handleMouseMove = (e: React.MouseEvent) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -186,6 +181,7 @@ export default function Hero() {
                 key={index}
                 className="inline-flex items-center gap-2 grayscale opacity-25 hover:grayscale-0 hover:opacity-100 transition-all duration-500"
               >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={tech.src}
                   alt={tech.name}

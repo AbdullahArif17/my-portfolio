@@ -72,7 +72,7 @@ export default function Contact() {
           className="mb-16"
         >
           <p className="text-xs font-bold uppercase tracking-[0.25em] text-[#8b5cf6] mb-3">Contact:</p>
-          <h2 className="text-3xl md:text-5xl font-black uppercase tracking-tight text-white">Let's Connect !</h2>
+          <h2 className="text-3xl md:text-5xl font-black uppercase tracking-tight text-white">Let&apos;s Connect !</h2>
         </motion.div>
 
         <div className="grid gap-12 lg:grid-cols-[1fr_1.2fr] items-start">
@@ -87,7 +87,7 @@ export default function Contact() {
             <div className="border border-zinc-800 bg-[#070708] p-8 rounded-none">
               <h3 className="text-lg font-black uppercase tracking-wider text-white mb-4">Direct Contact</h3>
               <p className="text-zinc-400 text-sm leading-relaxed">
-                I'm available for freelance and full-time opportunities. Reach out for a quick quote, collaboration, or just a friendly chat.
+                I&apos;m available for freelance and full-time opportunities. Reach out for a quick quote, collaboration, or just a friendly chat.
               </p>
             </div>
 
@@ -126,7 +126,7 @@ export default function Contact() {
             <div className="border border-zinc-800 bg-[#070708] p-8 rounded-none space-y-6">
               <div className="space-y-2">
                 <h3 className="text-lg font-black uppercase tracking-wider text-white">Send a Message</h3>
-                <p className="text-zinc-500 text-xs uppercase tracking-wider">I'll reply within 24 hours on business days.</p>
+                <p className="text-zinc-500 text-xs uppercase tracking-wider">I&apos;ll reply within 24 hours on business days.</p>
               </div>
 
               <form onSubmit={handleSubmit} className="space-y-6">

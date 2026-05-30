@@ -14,7 +14,7 @@ if (typeof globalThis !== "undefined" && !globalThis.window) {
       },
       configurable: true,
     });
-  } catch (e) {
+  } catch {
     // ignore fallback failure
   }
 }

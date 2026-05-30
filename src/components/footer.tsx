@@ -27,11 +27,11 @@ export default function Footer() {
           className="text-center mb-12"
         >
           <h2 className="text-3xl md:text-5xl font-black uppercase tracking-tight text-white mb-4">
-            LET'S BUILD SOMETHING
+            LET&apos;S BUILD SOMETHING
             <span className="bg-gradient-to-r from-[#a78bfa] to-[#e879f9] bg-clip-text text-transparent"> GREAT</span>
           </h2>
           <p className="text-zinc-500 text-sm max-w-lg mx-auto mb-8">
-            I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.
+            I&apos;m always open to discussing new projects, creative ideas, or opportunities to be part of your vision.
           </p>
           <a href="mailto:abdullaharif893@gmail.com">
             <motion.button
